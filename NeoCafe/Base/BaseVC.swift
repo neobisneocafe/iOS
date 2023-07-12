@@ -14,7 +14,6 @@ import UIKit
         setupConstrains()
         setupValues()
     }
-    
     func setupViews() {
     }
     

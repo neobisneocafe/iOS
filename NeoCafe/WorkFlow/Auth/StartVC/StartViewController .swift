@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class StartViewController: BaseViewController {
+final class StartViewController: BaseViewController {
     private lazy var mainImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit

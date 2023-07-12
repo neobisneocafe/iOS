@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LaunchScreenViewController: BaseViewController {
+final class LaunchScreenViewController: BaseViewController {
     private lazy var mainImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -34,7 +34,7 @@ class LaunchScreenViewController: BaseViewController {
 //    }
     
 //    private func animate() {
-//        UIView.animate(withDuration: 55, animations: {
+//        UIView.animate(withDuration: 56, animations: {
 //            let size = self.view.frame.size.width * 33
 //            let diffX = size - self.view.frame.size.width
 //            let diffY = self.view.frame.size.height - size

@@ -6,8 +6,13 @@
 //
 
 import UIKit
+protocol HorizontalMenuCollectionViewDelegate: AnyObject {
+  func didTapCellMenu(with index: Int)
+}
 
 class HorizontalMenuCollectionView: UICollectionView {
+    
+    weak var delegateTap: HorizontalMenuCollectionViewDelegate?
     
     private let categoryLayout = UICollectionViewFlowLayout()
     private let nameCategoryArray = ["Кофе", "Десерты", "Выпечка", "Коктейли", "Чай"]

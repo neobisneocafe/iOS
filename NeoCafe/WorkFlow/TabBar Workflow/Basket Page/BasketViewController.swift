@@ -150,7 +150,7 @@ extension BasketViewController {
     }
     
     @objc func menuTap () {
-        let vc = AddToCartVC()
+        let vc = CategoryMenuVC()
         navigationController?.pushViewController(vc, animated: true)
     }
 }

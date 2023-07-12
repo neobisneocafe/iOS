@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 class HorizontalMenuCollectionViewCell: UICollectionViewCell {
-    
      let nameCategoryLabel: UILabel = {
         let lb = UILabel()
         lb.textAlignment = .center
@@ -19,10 +18,10 @@ class HorizontalMenuCollectionViewCell: UICollectionViewCell {
         return lb
     }()
     
-    override var  isSelected: Bool {
+    override var isSelected: Bool {
         didSet {
-            backgroundColor = self.isSelected ? .systemBackground : .blue
-            nameCategoryLabel.textColor = self.isSelected ? .black : .white
+            backgroundColor = isSelected ? UIColor(red: 0.157, green: 0.224, blue: 0.322, alpha: 1) : UIColor.clear
+            nameCategoryLabel.textColor = isSelected ? .black : .white
         }
     }
     

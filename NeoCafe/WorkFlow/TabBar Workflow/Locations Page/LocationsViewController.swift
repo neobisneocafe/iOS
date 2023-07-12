@@ -119,7 +119,7 @@ extension LocationsViewController {
     }
     
     @objc func pushTap(){
-        let vc = HorizontalMenuVC()
+        let vc = NotifacationVC()
         navigationController?.pushViewController(vc, animated: true)
     }
 }

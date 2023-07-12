@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainViewController: BaseViewController {
     
@@ -26,11 +27,22 @@ class MainViewController: BaseViewController {
         }
     }
     
+  private lazy var searchController = UISearchController(searchResultsController: nil)
+   
+    private lazy var pushButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(named: "push"), for: .normal)
+        button.addTarget(self, action: #selector(pushTap), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
+        return button
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero,
                                     collectionViewLayout: makeCollectionLayout())
         
         view.dataSource = self
+        view.delegate = self
         view.register(TestCell.self, forCellWithReuseIdentifier: "TestCell")
         view.register(TestHeaderView.self,
                       forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -43,16 +55,31 @@ class MainViewController: BaseViewController {
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = .white
-        
+        self.view.addSubview(searchController.searchBar)
+        self.view.addSubview(pushButton)
+        self.view.addSubview(collectionView)
     }
     
     override func setupConstrains() {
-        view.addSubview(collectionView)
+        searchController.searchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(26))
+            make.leading.equalToSuperview().offset(computedWidth(16))
+            make.height.equalTo(computedHeight(48))
+            make.width.equalTo(computedWidth(296))
+        }
+        pushButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(40))
+            make.trailing.equalToSuperview().inset(computedWidth(16))
+        }
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(searchController.searchBar.snp.bottom).offset(computedHeight(20))
+            make.leading.trailing.equalToSuperview().inset(computedWidth(0))
+            make.bottom.equalToSuperview().offset(computedHeight(0))
         }
     }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension MainViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -90,8 +117,18 @@ extension MainViewController: UICollectionViewDataSource {
         return header
     }
 }
- 
-// MAKR: - Configure UICollectionViewCompositionalLayout
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = CategoryMenuVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+// MARK: - Configure UICollectionViewCompositionalLayout
+
 extension MainViewController {
     private func makeCollectionLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { [unowned self] index, _ in
@@ -104,7 +141,6 @@ extension MainViewController {
                 return self.makePopularItemsSectionLayout()
             }
         }
-        
         return layout
     }
     
@@ -128,7 +164,6 @@ extension MainViewController {
         )
         
         let section = NSCollectionLayoutSection(group: group)
-        
         return section
     }
     
@@ -141,7 +176,7 @@ extension MainViewController {
         )
         
         bigItem.contentInsets = .init(top: 8, leading: 8,
-                                   bottom: 8, trailing: 8)
+                                      bottom: 8, trailing: 8)
         let bigGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
@@ -158,8 +193,7 @@ extension MainViewController {
         )
         
         smallItem.contentInsets = .init(top: 8, leading: 8,
-                                   bottom: 8, trailing: 8)
-        
+                                        bottom: 8, trailing: 8)
         let smallGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
@@ -167,7 +201,6 @@ extension MainViewController {
             ),
             subitems: [smallItem]
         )
-                
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
@@ -175,14 +208,12 @@ extension MainViewController {
             ),
             subitems: [bigGroup, smallGroup]
         )
-        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: 0, leading: 8,
                                       bottom: 0, trailing: 8)
         section.boundarySupplementaryItems = [makeHeader()]
         return section
     }
-    
     private func makePopularItemsSectionLayout() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
@@ -190,7 +221,6 @@ extension MainViewController {
                 heightDimension: .fractionalHeight(1)
             )
         )
-        
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
@@ -198,7 +228,6 @@ extension MainViewController {
             ),
             subitems: [item]
         )
-        
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 18
         section.contentInsets = .init(top: 8, leading: 16,
@@ -208,16 +237,24 @@ extension MainViewController {
     }
     
     private func makeHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-            let headerSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .estimated(.zero)
-            )
-            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerSize,
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-            )
-            
-            return headerElement
-        }
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(.zero)
+        )
+        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        return headerElement
+    }
+}
+
+
+// MARK: - Selector
+
+extension MainViewController {
+    @objc func pushTap() {
+        
+    }
 }
