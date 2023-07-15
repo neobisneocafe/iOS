@@ -94,9 +94,18 @@ class CompletedOrderVC: BaseViewController {
         let button = BasicButton()
         button.mainSetup("Закрыть счет")
         button.addCornerRadius(10)
+        button.backgroundColor = UIColor(red: 0.157, green: 0.224, blue: 0.322, alpha: 1)
         button.addTarget(self, action: #selector(repeatTap), for: .touchUpInside)
         return button
     }()
+    
+//    let effect = UIBlurEffect(style: .dark)
+//            let effectView = UIVisualEffectView(effect: effect)
+//    func effectView;.frame = view.bounds
+//            effectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+    
+    private var bonusTextField = UITextField()
     
     override func setupViews() {
         super.setupViews()
@@ -198,6 +207,50 @@ extension CompletedOrderVC {
     }
     
     @objc func repeatTap() {
+        showWriteOffOfBonusesAlert()
+        print("tapAlert")
+    }
+    
+    private func showWriteOffOfBonusesAlert() {
+          let alertController = UIAlertController(
+            title: "Списание бонусов",
+            message: "У вас есть 100 бонусов, хотите использовать их?",
+            preferredStyle: .alert)
+          
+          let yesAction = UIAlertAction(title: "Да", style: .default) { (_) in
+              self.showBonusAlert()
+          }
+          
+          let noAction = UIAlertAction(title: "Нет", style: .cancel,
+                                       handler: nil)
+//          alertController.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+          alertController.addAction(yesAction)
+          alertController.addAction(noAction)
+          
+          present(alertController, animated: true, completion: nil)
+      }
+    
+    private func showBonusAlert() {
+        let alert = UIAlertController(
+            title: "Cписание бонусов",
+            message: "Введите количество бонусов, которое хотите списать",
+            preferredStyle: .alert)
         
+        alert.addTextField(configurationHandler: configurationTextField)
+        alert.addAction(UIAlertAction(title: "Списать",
+                                      style: .default) {_ in
+        })
+        alert.addAction(UIAlertAction(title: "Отмена",
+                                      style: .cancel))
+        present(alert, animated: true)
+        
+//        alert.view.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        alert.view.superview?.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        
+    }
+    
+    private func configurationTextField(textField: UITextField) {
+        self.bonusTextField = textField
+        textField.keyboardType = .numberPad
     }
 }

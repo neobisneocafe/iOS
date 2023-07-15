@@ -36,7 +36,6 @@ extension UITextField {
         }
     }
      
-    
     // MARK: - UIDatePicker
     func addInputDatePicker(target: Any, selector: Selector) {
         let screenWidth = UIScreen.main.bounds.width
@@ -58,8 +57,9 @@ extension UITextField {
         toolBar.setItems([cancelBarButton, flexibleSpace, doneBarButton], animated: true)
         self.inputAccessoryView = toolBar
     }
-    
+
     @objc func cancelPressed() {
         self.resignFirstResponder()
     }
+    
 }

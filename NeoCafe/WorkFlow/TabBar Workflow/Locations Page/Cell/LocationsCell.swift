@@ -8,15 +8,15 @@
 import UIKit
 import SnapKit
 
-protocol ButtonDelegate: AnyObject {
-    func didTapButton()
-    func didTapPhone()
+protocol LocationsCellDelegate: AnyObject {
+    func didTapAppButton()
+    func didTapPhoneNumBerButton()
 }
 
 class LocationsCell: UICollectionViewCell {
     static let identifier = "LocationsCell"
     
-    weak var buttonDelegate: ButtonDelegate?
+    weak var delegate: LocationsCellDelegate?
     
     private lazy var locationImage: UIImageView = {
         let iv = UIImageView()
@@ -155,13 +155,12 @@ class LocationsCell: UICollectionViewCell {
 // MARK: - Selectors
 
 extension LocationsCell {
-    @objc func open2GisTapped () {
-    buttonDelegate?.didTapButton()
-        UIApplication.shared.open(URL(string: "https://2gis.kg/bishkek")! as URL, options: [:], completionHandler: nil)
+    @objc func open2GisTapped() {
+        delegate?.didTapAppButton()
     }
     
     @objc func tapPhone() {
-        buttonDelegate?.didTapPhone()
-        print("phone")
+        delegate?.didTapPhoneNumBerButton()
     }
 }
+    

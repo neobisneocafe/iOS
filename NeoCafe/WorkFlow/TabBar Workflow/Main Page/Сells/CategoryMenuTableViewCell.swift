@@ -19,7 +19,7 @@ class CategoryMenuTableViewCell: UITableViewCell {
     
     public lazy var iv: UIImageView = {
         let iv = UIImageView()
-        iv.layer.cornerRadius = 22
+        iv.addCornerRadius(22)
         iv.contentMode = .scaleAspectFit
         iv.image = UIImage(named: "coffee")
         iv.clipsToBounds = true

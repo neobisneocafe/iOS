@@ -116,8 +116,7 @@ class AddToCartVC: BaseViewController {
             AddToCartVC.didTapBoardSkip()
         }
         item.appearance.actionButtonColor = UIColor(red: 1, green: 0.545, blue: 0.358, alpha: 1)
-//        item.appearance.alternativeButtonTitle.layer.borderColor = UIColor(red: 1, green: 0.649, blue: 0.5, alpha: 1).cgColor
-//        item.appearance.alternativeButtonTitle.layer.borderWidth = 2
+
         return BLTNItemManager(rootItem: item)
     }()
     

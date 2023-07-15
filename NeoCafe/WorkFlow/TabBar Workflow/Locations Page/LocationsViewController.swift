@@ -100,6 +100,7 @@ extension LocationsViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationsCell.identifier, for: indexPath) as! LocationsCell
+        cell.delegate = self
         return cell
     }
     
@@ -109,6 +110,36 @@ extension LocationsViewController: UICollectionViewDataSource, UICollectionViewD
 }
 
 
+// MARK: - LocationsCellDelegate
+
+extension LocationsViewController: LocationsCellDelegate {
+    func didTapAppButton() {
+        let alertController = UIAlertController(title: "Мы переведем вас в 2ГИС",
+                                                message:"Вы сможете быстро сориентироваться и найти быстрый маршрут к нам! Ждем вас!", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Перейти",
+                                      style: .default) { (_) in
+            // Открытие другого приложения
+            if let url = URL(string: "https://2gis.kg/bishkek") {
+                UIApplication.shared.open(url,
+                                          options: [:],
+                                          completionHandler: nil)
+            }
+        }
+        let noAction = UIAlertAction(title: "Остаться",
+                                     style: .cancel,
+                                     handler: nil)
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func didTapPhoneNumBerButton() {
+
+    }
+
+    }
+    
+   
 
 // MARK: - Selector
 

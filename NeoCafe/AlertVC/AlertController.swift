@@ -5,9 +5,29 @@
 //  Created by Adinay on 3/7/23.
 //
 
-//import UIKit
-//import BLTNITEMMANAGER
+import UIKit
+
+//class AlertController: UIAlertController {
 //
+//func showAlertAndOpenApp(in viewController: UIViewController) {
+//       let alertController = UIAlertController(title: "Перейти в другое приложение", message: "Вы хотите перейти в другое приложение?", preferredStyle: .alert)
+//
+//       let yesAction = UIAlertAction(title: "Да", style: .default) { (_) in
+//           // Открытие другого приложения
+//           if let url = URL(string: "https://2gis.kg/bishkek") {
+//               UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//           }
+//       }
+//
+//       let noAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
+//
+//       alertController.addAction(yesAction)
+//       alertController.addAction(noAction)
+//
+//       viewController.present(alertController, animated: true)
+//   }
+//}
+
 //protocol AlertControllerDelegate: AnyObject {
 //    func didTapYes()
 //    func didTapNo()
@@ -53,6 +73,3 @@
 //        return alertPage
 //    }
 //}
-//
-//
-//

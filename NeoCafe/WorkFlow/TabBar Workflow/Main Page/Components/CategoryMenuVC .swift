@@ -95,9 +95,9 @@ class CategoryMenuVC: BaseViewController {
 }
 
 
-// MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource
 
-extension CategoryMenuVC: UITableViewDataSource, UITableViewDelegate {
+extension CategoryMenuVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -112,6 +112,14 @@ extension CategoryMenuVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDelegate
+
+extension CategoryMenuVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailsDishVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 
 // MARK: - Selector
