@@ -220,13 +220,11 @@ extension CompletedOrderVC {
           let yesAction = UIAlertAction(title: "Да", style: .default) { (_) in
               self.showBonusAlert()
           }
-          
           let noAction = UIAlertAction(title: "Нет", style: .cancel,
                                        handler: nil)
 //          alertController.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
           alertController.addAction(yesAction)
           alertController.addAction(noAction)
-          
           present(alertController, animated: true, completion: nil)
       }
     
