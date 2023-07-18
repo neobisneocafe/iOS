@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BasicTextField: UITextField {
+final class BasicTextField: UITextField {
     init() {
         super.init(frame: .zero)
         setupConstrains()

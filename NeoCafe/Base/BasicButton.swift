@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BasicButton: UIButton {
+final class BasicButton: UIButton {
     init() {
         super.init(frame: .zero)
         setupConstrains()

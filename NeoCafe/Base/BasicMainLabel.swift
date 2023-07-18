@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BasicMainLabel: UILabel {
+final class BasicMainLabel: UILabel {
     init() {
         super.init(frame: .zero)
         setupConstrains()

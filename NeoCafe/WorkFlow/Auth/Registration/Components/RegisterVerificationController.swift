@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class RegisterVerificationController: BaseViewController {
+    
     private lazy var backImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -71,6 +72,15 @@ class RegisterVerificationController: BaseViewController {
         label.addGestureRecognizer(tap)
         return label
     }()
+    
+    let registerVerificationViewModel: RegisterVerificationViewModel
+    init(registerVerificationViewModel: RegisterVerificationViewModel) {
+        self.registerVerificationViewModel = registerVerificationViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setupViews() {
         super.setupViews()
@@ -138,15 +148,19 @@ extension RegisterVerificationController {
     }
     
     @objc func toComeInButtonTapped() {
-        DispatchQueue.main.async { [weak self] in
-            let vc = DateOfBirthViewController()
-            self?.navigationController?.pushViewController(vc, animated: true)
-            print("dsfs")
+        guard let mainTextField = mainTextField.text  else { return }
+        if !mainTextField.isEmpty  {
+           let vc = registerVerificationViewModel.registerVerification(phoneNumber: "", code: "") { code in
+               let vc = DateOfBirthViewController()
+               vc.code = code
+               DispatchQueue.main.async { [weak self] in
+                   self?.navigationController?.pushViewController(vc, animated: true)
+               }
+            }
         }
     }
     
     @objc func sendAgainTap() {
-      print("sds")
     }
 }
 

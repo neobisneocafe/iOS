@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "bulletinboard",
+      "identity" : "alamofire",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/alexaubry/BulletinBoard.git",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "e8ba81d25e41e5d24d6a4f404ed28443d728723b",
-        "version" : "5.0.0"
+        "revision" : "bc268c28fb170f494de9e9927c371b8342979ece",
+        "version" : "5.7.1"
       }
     },
     {

@@ -40,7 +40,7 @@ class AuthViewController: BaseViewController {
         return sv
     }()
     
-    private lazy var numberTextField: UITextField = {
+    private lazy var phoneNumberTextField: UITextField = {
         let tf = BasicTextField()
         tf.mainSetup("552 555 555")
         tf.keyboardType = .numberPad
@@ -60,13 +60,20 @@ class AuthViewController: BaseViewController {
         let bt = BasicButton()
         bt.mainSetup("Получить код")
         bt.addTarget(self, action: #selector(toGetTheCodeButtonTapped), for: .touchUpInside)
-        bt.alpha = numberTextField.text?.isEmpty ?? false ? 0.5 : 1.0
-       
+        bt.alpha = phoneNumberTextField.text?.isEmpty ?? false ? 0.5 : 1.0
         return bt
     }()
+    
+    let authViewModel: AuthViewModel
+    init(authViewModel: AuthViewModel) {
+        self.authViewModel = authViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
    
 //    private var countryCode = "+996"
-    
     
     override func setupViews() {
         super.setupViews()
@@ -75,10 +82,10 @@ class AuthViewController: BaseViewController {
         view.addSubview(mainImage)
         view.addSubview(entranceLabel)
         view.addSubview(mainStackView)
-        view.addSubview(numberTextField)
+        view.addSubview(phoneNumberTextField)
         view.addSubview(numberIconImage)
         view.addSubview(toGetTheCodeButton)
-        [numberTextField,
+        [phoneNumberTextField,
          toGetTheCodeButton]
         .forEach {mainStackView.addArrangedSubview($0)}
        
@@ -105,8 +112,8 @@ class AuthViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(computedWidth(16))
         }
         numberIconImage.snp.makeConstraints {
-            $0.centerY.equalTo(numberTextField.snp.centerY)
-            $0.leading.equalTo(numberTextField.snp.leading).offset(computedHeight(78))
+            $0.centerY.equalTo(phoneNumberTextField.snp.centerY)
+            $0.leading.equalTo(phoneNumberTextField.snp.leading).offset(computedHeight(78))
             $0.height.equalTo(computedHeight(18))
         }
     }
@@ -122,10 +129,38 @@ extension AuthViewController {
         }
     }
     
+//    @objc func toGetTheCodeButtonTapped() {
+//        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else {
+//            return // Возвращаться, если номер телефона не был введен
+//        }
+//
+//        // Вызвать метод authUser для проверки пользователя
+//        authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] response in
+//            DispatchQueue.main.async {
+//                switch response {
+//                case .success:
+//                    self?.navigationController?.pushViewController(AuthVerificationController(), animated: true)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                    // Обработать ошибку проверки пользователя
+//                }
+//            }
+//        }
+//
+//        }
+//    }
+
+    
+    
     @objc func toGetTheCodeButtonTapped() {
-        DispatchQueue.main.async { [weak self] in
-            let vc = AuthVerificationController()
-            self?.navigationController?.pushViewController(vc, animated: true)
+        guard let phoneNumber = phoneNumberTextField.text else { return }
+
+        if !phoneNumber.isEmpty {
+            authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in
+                DispatchQueue.main.async {
+                    self?.navigationController?.pushViewController(AuthVerificationController(), animated: true)
+                }
+            }
         }
     }
 }
@@ -136,12 +171,12 @@ extension AuthViewController {
 extension AuthViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text?.isEmpty ?? true {
-            textField.text = "+996"
+            textField.text = "996"
         }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let phone = numberTextField.text  else {
+        guard let phone = phoneNumberTextField.text  else {
             return false
         }
         toGetTheCodeButton.isEnabled = !phone.isEmpty

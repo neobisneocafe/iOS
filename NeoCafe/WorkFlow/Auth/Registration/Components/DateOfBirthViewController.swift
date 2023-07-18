@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 class DateOfBirthViewController: BaseViewController {
+    
+    var code: String? = nil
+    
     private lazy var backImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -25,7 +28,6 @@ class DateOfBirthViewController: BaseViewController {
         label.textColor = UIColor(red: 1, green: 0.545, blue: 0.358, alpha: 1)
         label.font = .systemFont(ofSize: 17, weight: .regular)
         label.isUserInteractionEnabled = true
-        
         let tappedForget = UITapGestureRecognizer(target: self, action: #selector(skipTapped))
         label.addGestureRecognizer(tappedForget)
         return label

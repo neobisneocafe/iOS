@@ -63,14 +63,14 @@ final class StartViewController: BaseViewController {
 extension StartViewController {
     @objc func toComeInButtonTapped() {
         DispatchQueue.main.async { [weak self] in
-            let vc = AuthViewController()
+            let vc = AuthViewController(authViewModel: AuthViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     @objc func registrationButtonTapped() {
         DispatchQueue.main.async { [weak self] in
-            let vc = PhoneRegistrationViewController()
+            let vc = PhoneRegistrationViewController(signUpViewModel: SignUpViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
         }
     }

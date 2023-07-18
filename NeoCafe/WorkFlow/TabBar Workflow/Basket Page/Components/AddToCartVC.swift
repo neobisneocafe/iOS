@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import BLTNBoard
 
 class AddToCartVC: BaseViewController {
     private lazy var backButton: UIButton = {
@@ -102,25 +101,6 @@ class AddToCartVC: BaseViewController {
         sv.distribution = .fillEqually
         return sv
     }()
-    
-    private lazy var bulletinManager: BLTNItemManager = {
-        let item = BLTNPageItem(title: "Списание Бонусов")
-        item.descriptionText = "У вас есть 100 бонусов, хотите использовать их?"
-        item.actionButtonTitle = "Да"
-        item.alternativeButtonTitle = "Нет"
-        
-        item.actionHandler = {  _ in
-            AddToCartVC.didTapBoardContinue()
-        }
-        item.alternativeHandler = { _ in
-            AddToCartVC.didTapBoardSkip()
-        }
-        item.appearance.actionButtonColor = UIColor(red: 1, green: 0.545, blue: 0.358, alpha: 1)
-
-        return BLTNItemManager(rootItem: item)
-    }()
-    
-    
     
     private lazy var takeAwayButton: UIButton = {
         let button = UIButton()
@@ -267,18 +247,8 @@ extension AddToCartVC {
     }
     
     @objc func takeAwayTapped() {
-        bulletinManager.showBulletin(above: self)
+       
     }
-    
-    
-    static func didTapBoardContinue() {
-        
-    }
-    
-    static func didTapBoardSkip() {
-        
-    }
-    
     
     @objc func inTheCafeTapped() {
         let vc = QRCodeViewController()
