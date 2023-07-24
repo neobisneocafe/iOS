@@ -8,26 +8,16 @@
 import Foundation
 
 class RegisterVerificationViewModel {
-    
-    var code = ""
-    func registerVerification(phoneNumber: String, code: String, completion: @escaping (String) -> Void) {
-        NetworkManager().sendRequest(urlRequest: ApiService.postActiveToken(token: code).makeUrlRequest()) { response
-            in
-            switch response {
-            case .success(let string):
-                print(string)
-                self.code = string as! String
-                completion(string as! String)
-            case .unauthorized(let string):
-                print(string)
-            case .forebidden(let string):
-                print(string)
-            case .notfound(let string):
-                print(string)
-            case .badrequest(let string):
-                print(string)
-            case .failerror(let string):
-                print(string)
+    func registerVerification(phoneNumber: String, codeToConfirm: String, completion: @escaping (String) -> Void) {
+        NetworkManager().performRequest(
+            urlRequest: ApiService.postActiveToken(phoneNumber: phoneNumber,codeToConfirm: codeToConfirm).makeUrlRequest(),
+            successModel: AccessTokenResponse.self
+        ) { result in
+            switch result {
+            case .success(let response):
+                completion(response.accessToken ?? "")
+            default:
+                break
             }
         }
     }

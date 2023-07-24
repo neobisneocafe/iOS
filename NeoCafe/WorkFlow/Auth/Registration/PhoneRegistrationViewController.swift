@@ -78,7 +78,6 @@ class PhoneRegistrationViewController: BaseViewController {
         return button
     }()
     
-    
     let signUpViewModel: SignUpViewModel
     init(signUpViewModel: SignUpViewModel) {
         self.signUpViewModel = signUpViewModel
@@ -87,7 +86,6 @@ class PhoneRegistrationViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private var countryCode = "+996"
     
@@ -147,8 +145,7 @@ class PhoneRegistrationViewController: BaseViewController {
 }
 
 
-
-// MARK: - Selector
+// MARK: - Selectors
 
 extension PhoneRegistrationViewController {
     @objc func backTap() {
@@ -164,13 +161,12 @@ extension PhoneRegistrationViewController {
         if !firstName.isEmpty && !phoneNumber.isEmpty {
             signUpViewModel.signUpUser(firstName: firstName, phoneNumber: phoneNumber) { [weak self] in
                 DispatchQueue.main.async {
-                    self?.navigationController?.pushViewController(RegisterVerificationController(registerVerificationViewModel: RegisterVerificationViewModel()), animated: true)
+                    self?.navigationController?.pushViewController(RegisterVerificationController(phoneNumber: phoneNumber, registerVerificationViewModel: RegisterVerificationViewModel()), animated: true)
                 }
             }
         }
     }
 }
-
 
 // MARK: - UITextFieldDelegate
 
@@ -180,7 +176,6 @@ extension PhoneRegistrationViewController: UITextFieldDelegate {
             textField.text = "996"
         }
     }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let name = firstNameField.text, let phone = phoneNumberTextField.text else {
             return false

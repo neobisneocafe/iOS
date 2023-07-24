@@ -11,6 +11,27 @@ import Alamofire
 class NetworkManager {
 //    static let shared = NetworkManager()
     
+    func performVoid(urlRequest: URLRequest, completion: @escaping (ProResult<Void>) -> Void) {
+        AF.request(urlRequest).responseString { response in
+            if response.response?.statusCode == 201 || response.response?.statusCode == 200 {
+                completion(.success(()))
+                return
+            }
+            if response.response?.statusCode == 400 {
+                let jsonData = response.data?.description.data(using: .utf8)
+                guard jsonData != nil else { return }
+                print(String(data: response.data!, encoding: .utf8)!)
+                completion(.badrequest("Bad request"))
+
+            } else if response.response?.statusCode == StatusCode.unauthorized.rawValue {
+                completion(.unauthorized("Access token is dead"))
+                // Fetch new access token
+            } else if let error = response.error {
+                completion(.failure(error.localizedDescription))
+            }
+        }
+    }
+    
     func performRequest<T: Decodable>(urlRequest: URLRequest, successModel: T.Type, completion: @escaping (ProResult<T>) -> Void) {
         AF.request(urlRequest).responseDecodable(of: successModel.self) { response in
             switch response.result {
@@ -26,14 +47,14 @@ class NetworkManager {
                     completion(.unauthorized("Access token is dead"))
                     // Fetch new access token
                 } else {
-                    completion(.failerror(error.localizedDescription))
+                    completion(.failure(error.localizedDescription))
                 }
             }
         }
     }
     
     
-    func sendRequest(urlRequest: URLRequest, completion: @escaping(ProResult<Any>) -> Void ) {
+    func sendRequest(urlRequest: URLRequest, completion: @escaping(ProResult<String>) -> Void ) {
         AF.request(urlRequest).responseString { response in
             switch response.result {
             case .success(let sucessModel):
@@ -46,7 +67,7 @@ class NetworkManager {
                     completion(.unauthorized(error.localizedDescription))
                     // Fetch new access token
                 } else {
-                    completion(.failerror(error.localizedDescription))
+                    completion(.failure(error.localizedDescription))
                 }
             }
         }
@@ -73,6 +94,8 @@ class NetworkManager {
                 return NetworkErrors.unauthorized
             case StatusCode.badRequest.rawValue:
                 return NetworkErrors.badRequest
+            case StatusCode.internalServerError.rawValue:
+                return NetworkErrors.internalServerError
             case StatusCode.forbidden.rawValue:
                 return NetworkErrors.forbidden
             default:

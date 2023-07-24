@@ -74,7 +74,10 @@ class RegisterVerificationController: BaseViewController {
     }()
     
     let registerVerificationViewModel: RegisterVerificationViewModel
-    init(registerVerificationViewModel: RegisterVerificationViewModel) {
+    let phoneNumber: String
+
+    init(phoneNumber: String, registerVerificationViewModel: RegisterVerificationViewModel) {
+        self.phoneNumber = phoneNumber
         self.registerVerificationViewModel = registerVerificationViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -101,35 +104,29 @@ class RegisterVerificationController: BaseViewController {
             $0.leading.equalToSuperview().offset(computedWidth(24))
             $0.height.equalTo(computedHeight(18))
         }
-        
         mainImage.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(106))
             $0.leading.trailing.equalToSuperview().inset(computedWidth(102))
             $0.height.equalTo(computedHeight(92))
         }
-        
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(mainImage.snp.bottom).offset(computedHeight(38))
             $0.leading.trailing.equalToSuperview().inset(computedWidth(76))
         }
-        
         mainTapLabel.snp.makeConstraints {
             $0.top.equalTo(mainLabel.snp.bottom).offset(computedHeight(4))
             $0.leading.equalToSuperview().offset(computedWidth(30))
         }
-        
         mainTextField.snp.makeConstraints {
             $0.top.equalTo(mainTapLabel.snp.bottom).offset(computedHeight(36))
             $0.leading.trailing.equalToSuperview().inset(computedWidth(106))
             $0.height.equalTo(computedHeight(40))
             $0.width.equalTo(computedWidth(24))
         }
-        
         tocomeInnButton.snp.makeConstraints {
             $0.top.equalTo(mainTextField.snp.bottom).offset(computedHeight(36))
             $0.leading.trailing.equalToSuperview().inset(computedWidth(16))
         }
-        
         sendAgainLabel.snp.makeConstraints {
             $0.top.equalTo(tocomeInnButton.snp.bottom).offset(computedHeight(20))
             $0.leading.equalToSuperview().offset(computedWidth(128))
@@ -148,18 +145,17 @@ extension RegisterVerificationController {
     }
     
     @objc func toComeInButtonTapped() {
-        guard let mainTextField = mainTextField.text  else { return }
-        if !mainTextField.isEmpty  {
-           let vc = registerVerificationViewModel.registerVerification(phoneNumber: "", code: "") { code in
-               let vc = DateOfBirthViewController()
-               vc.code = code
-               DispatchQueue.main.async { [weak self] in
-                   self?.navigationController?.pushViewController(vc, animated: true)
-               }
+        guard let mainTextField = mainTextField.text, !mainTextField.isEmpty else { return }
+        registerVerificationViewModel.registerVerification(phoneNumber: phoneNumber, codeToConfirm: mainTextField) { accessToken in
+            DataStoreUserDefaults.shared.setAccessToken(accessToken)
+            let vc = DateOfBirthViewController()
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
     
+        
     @objc func sendAgainTap() {
     }
 }

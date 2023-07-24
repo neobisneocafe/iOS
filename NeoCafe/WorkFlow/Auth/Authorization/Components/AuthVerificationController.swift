@@ -72,6 +72,15 @@ class AuthVerificationController: BaseViewController {
         return label
     }()
     
+    let authVerificationViewModel: AuthVerificationViewModel
+    init(authVerificationViewModel: AuthVerificationViewModel) {
+        self.authVerificationViewModel = authVerificationViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = UIColor(red: 0.973, green: 0.973, blue: 0.973, alpha: 1)
@@ -138,12 +147,16 @@ extension AuthVerificationController {
     }
     
     @objc func tapSendAgain() {
-      
+        guard let mainTextField = mainTextField.text  else { return }
+        if !mainTextField.isEmpty  {
+            authVerificationViewModel.authVerification(verificationCode: "") { verificationCode in
+                let vc = MainTabBarController()
+                DispatchQueue.main.async { [weak self] in
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
     @objc func toComeInButtonTap() {
-        DispatchQueue.main.async { [weak self] in
-            let vc = MainTabBarController()
-            self?.navigationController?.pushViewController(vc, animated: true)
-        }
     }
 }

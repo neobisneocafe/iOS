@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import SwiftyJSON
 
 class LocationsViewController: BaseViewController {
+    
+//    var branch = [BranchDTO]()
+    
     private lazy var backImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -62,6 +66,7 @@ class LocationsViewController: BaseViewController {
         view.addSubview(pushButton)
         view.addSubview(branchLabel)
         view.addSubview(collection)
+//        fetcSpeakers()
     }
     
     override func setupConstrains() {
@@ -88,6 +93,36 @@ class LocationsViewController: BaseViewController {
             $0.bottom.trailing.leading.equalToSuperview()
         }
     }
+    
+//    func fetcSpeakers() {
+//        let url = URL(string: "https://neo-cafe-neobis-d301ec8e3f9a.herokuapp.com/api/branch")
+//        var request = URLRequest(url: url!)
+//        request.httpMethod = "GET"
+////        DataStoreUserDefaults.shared.setAccessToken(accessToken)
+//        request.setValue("Bearer \(DSGenerator.sharedInstance.getAccessToken()!)", forHTTPHeaderField: "Authorization")
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data, error == nil else  {
+//                print("Произошла ошибка при доступе к данным")
+//                return
+//            }
+//            let json = JSON(data)
+//            print(json)
+//            if let httpResponse = response as? HTTPURLResponse {
+//                    print(httpResponse.statusCode)
+//                }
+//            do {
+//                let branch  = try JSONDecoder().decode([BranchDTO].self, from: data)
+//                self.branch = branch
+//            }
+//            catch {
+//                print("Ошибка при декодировании Json в структуру Swift")
+//            }
+//            DispatchQueue.main.async { [weak self] in
+//                self?.collection.reloadData()  // обновляет таблицу
+//            }
+//        }
+//        task.resume()
+//    }
 }
 
 
@@ -95,12 +130,14 @@ class LocationsViewController: BaseViewController {
 
 extension LocationsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationsCell.identifier, for: indexPath) as! LocationsCell
         cell.delegate = self
+//        cell.locationNameLabel.text = branch[indexPath.row].name
+//        cell.adressLabel.text = String(branch[indexPath.row].adress!)
         return cell
     }
     

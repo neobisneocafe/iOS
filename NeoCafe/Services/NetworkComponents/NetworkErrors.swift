@@ -12,4 +12,5 @@ enum NetworkErrors: Error {
     case unauthorized
     case forbidden
     case notFound
+    case internalServerError
 }

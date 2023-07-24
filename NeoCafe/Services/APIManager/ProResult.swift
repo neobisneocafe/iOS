@@ -10,8 +10,8 @@ import Foundation
 enum ProResult <M>  {
     case success(M)
     case unauthorized(String)
-    case forebidden(String)
+    case forbidden(String)
     case notfound(String)
     case badrequest(String)
-    case failerror(String)
+    case failure(String)
 }

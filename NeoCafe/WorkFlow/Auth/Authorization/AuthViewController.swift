@@ -129,7 +129,66 @@ extension AuthViewController {
         }
     }
     
+    
+    @objc func toGetTheCodeButtonTapped() {
+        
+        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else { return }
+        
+        authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in
+            let vc = AuthVerificationController(authVerificationViewModel: AuthVerificationViewModel())
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+}
+    
 //    @objc func toGetTheCodeButtonTapped() {
+//
+//        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else { return }
+//
+//        authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in
+//
+//            let vc = AuthVerificationController(authVerificationViewModel: AuthVerificationViewModel())
+//            DispatchQueue.main.async { [weak self] in
+//                self?.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
+//    }
+    
+//    @objc func toGetTheCodeButtonTapped() {
+//
+//        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else { return }
+//
+//        authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in
+//                guard let self = self else { return }
+//                let vc = AuthVerificationController(authVerificationViewModel: AuthVerificationViewModel())
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.navigationController?.pushViewController(vc, animated: true)
+//                }
+//            }
+//    }
+    
+
+    
+//    @objc func toGetTheCodeButtonTapped() {
+//
+//                guard let phoneNumber = phoneNumberTextField.text else { return }
+//        let authorizationDTO = AuthorizationDTO(from: phoneNumber as! Decoder )
+//                if !phoneNumber.isEmpty {
+//                    authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in
+//                        let vc = AuthVerificationController(authVerificationViewModel: AuthVerificationViewModel())
+//                        DispatchQueue.main.async { [weak self] in
+//                            self?.navigationController?.pushViewController(vc, animated: true)
+//                        }
+//                        DispatchQueue.main.async {
+//                            self?.navigationController?.pushViewController(AuthVerificationController(authVerificationViewModel: AuthVerificationViewModel()), animated: true)
+//                        }
+//                    }
+//                }
+//            }
+        
+        
 //        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else {
 //            return // Возвращаться, если номер телефона не был введен
 //        }
@@ -139,32 +198,21 @@ extension AuthViewController {
 //            DispatchQueue.main.async {
 //                switch response {
 //                case .success:
-//                    self?.navigationController?.pushViewController(AuthVerificationController(), animated: true)
+//                    self?.navigationController?.pushViewController(AuthVerificationController(authVerificationViewModel: AuthVerificationViewModel()), animated: true)
 //                case .failure(let error):
 //                    print(error.localizedDescription)
 //                    // Обработать ошибку проверки пользователя
 //                }
 //            }
 //        }
-//
-//        }
-//    }
+
+ //       }
+   // }
+    
 
     
     
-    @objc func toGetTheCodeButtonTapped() {
-        guard let phoneNumber = phoneNumberTextField.text else { return }
-
-        if !phoneNumber.isEmpty {
-            authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in
-                DispatchQueue.main.async {
-                    self?.navigationController?.pushViewController(AuthVerificationController(), animated: true)
-                }
-            }
-        }
-    }
-}
-
+   
 
 // MARK: - UITextFieldDelegate
 

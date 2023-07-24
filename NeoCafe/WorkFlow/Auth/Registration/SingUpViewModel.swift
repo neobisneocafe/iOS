@@ -7,10 +7,6 @@
 
 import Foundation
 
-//protocol SingUpViewModelProtocol {
-//    func singUpUser(firstName: String , phoneNumber: String)
-//}
-
 class SignUpViewModel {
     func signUpUser(firstName: String, phoneNumber: String, completion: @escaping ()->Void) {
         let data = ["firstName": "\(firstName)",
@@ -20,11 +16,11 @@ class SignUpViewModel {
             case .success(let model):
                 print(model)
                 completion() // Вызов обработчика завершения после успешной регистрации
-            case .failerror(let error):
+            case .failure(let error):
                 print(error)
             case .unauthorized(let string):
                 print(string)
-            case .forebidden(let string):
+            case .forbidden(let string):
                 print(string)
             case .notfound(let string):
                 print(string)
@@ -34,4 +30,3 @@ class SignUpViewModel {
         }
     }
 }
-

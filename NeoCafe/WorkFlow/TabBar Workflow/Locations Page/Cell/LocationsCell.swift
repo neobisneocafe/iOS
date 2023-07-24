@@ -18,7 +18,7 @@ class LocationsCell: UICollectionViewCell {
     
     weak var delegate: LocationsCellDelegate?
     
-    private lazy var locationImage: UIImageView = {
+     lazy var locationImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.isUserInteractionEnabled = true
@@ -26,15 +26,23 @@ class LocationsCell: UICollectionViewCell {
         return iv
     }()
     
-    private lazy var timeLabel: UILabel = {
+    private lazy var openingTimeLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "Сегодня: с 11:00 до 22:00"
+        lb.text = "Сегодня: с 11:00 "
         lb.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         lb.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         return lb
     }()
     
-    private lazy var locationNameLabel: UILabel = {
+    private lazy var closingTimeLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "до 22:00"
+        lb.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        lb.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        return lb
+    }()
+    
+     lazy var locationNameLabel: UILabel = {
         let lb = UILabel()
         lb.text = "NeoCafe Dzerzhinka"
         lb.textColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1)
@@ -42,7 +50,7 @@ class LocationsCell: UICollectionViewCell {
         return lb
     }()
     
-    private lazy var adressLabel: UILabel = {
+     lazy var adressLabel: UILabel = {
         let lb = UILabel()
         lb.text = "бульвар Эркиндик, 35"
         lb.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -98,7 +106,8 @@ class LocationsCell: UICollectionViewCell {
     }
     private func setupViews() {
         addSubview(locationImage)
-        locationImage.addSubview(timeLabel)
+        locationImage.addSubview(openingTimeLabel)
+        locationImage.addSubview(closingTimeLabel)
         locationImage.addSubview(locationNameLabel)
         locationImage.addSubview(adressLabel)
         locationImage.addSubview(adressImage)
@@ -113,13 +122,17 @@ class LocationsCell: UICollectionViewCell {
             $0.leading.equalToSuperview().offset(computedWidth(16))
             $0.bottom.equalToSuperview().offset(computedHeight(10))
         }
-        timeLabel.snp.makeConstraints {
+        openingTimeLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(computedHeight(16))
             $0.leading.equalToSuperview().offset(computedWidth(16))
             $0.height.equalTo(computedHeight(14))
         }
+        closingTimeLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(computedHeight(14))
+            make.leading.equalTo(openingTimeLabel.snp.trailing).offset(computedWidth(4))
+        }
         locationNameLabel.snp.makeConstraints {
-            $0.top.equalTo(timeLabel.snp.bottom).offset(computedHeight(56))
+            $0.top.equalTo(openingTimeLabel.snp.bottom).offset(computedHeight(56))
             $0.leading.equalToSuperview().offset(computedWidth(16))
             $0.height.equalTo(computedHeight(34))
         }
@@ -149,6 +162,10 @@ class LocationsCell: UICollectionViewCell {
             $0.height.width.equalTo(computedHeight(computedWidth(26)))
         }
     }
+//    func configure(with model: BranchDTO) {
+//        locationNameLabel.text = model.name
+//        adressLabel.text = model.adress
+//    }
 }
 
 

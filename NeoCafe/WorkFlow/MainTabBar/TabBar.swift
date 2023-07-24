@@ -8,7 +8,7 @@
 import UIKit
 import FittedSheets
 
-enum TabBar: CaseIterable {
+ enum TabBar: CaseIterable {
     case Home
     case Basket
     case QrCode
@@ -55,7 +55,7 @@ enum TabBar: CaseIterable {
 
 // MARK: - UITabBarController
 
-class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()

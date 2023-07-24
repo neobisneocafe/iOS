@@ -8,18 +8,21 @@
 import Foundation
 
 class AuthViewModel {
+    var phoneNumber = ""
     func authUser(phoneNumber: String, completion: @escaping ()->Void) {
+        let string = phoneNumber
         let userData = ["phoneNumber": "\(phoneNumber)"].toData()
-        NetworkManager().performRequest(urlRequest: ApiService.postAuthorizationUser(auth: userData).makeUrlRequest(), successModel: AuthorizationDTO.self) { result in
+
+        NetworkManager().performVoid(urlRequest: ApiService.postAuthorizationUser(auth: userData).makeUrlRequest()) { [weak self] result in
             switch result {
-            case .success(let model):
-                print(model)
-                completion() // Вызов обработчика завершения после успешной регистрации
-            case .failerror(let error):
+            case .success:
+                self?.phoneNumber = string
+                completion() // Вызов обработчика завершения после успешной
+            case .failure(let error):
                 print(error)
             case .unauthorized(let string):
                 print(string)
-            case .forebidden(let string):
+            case .forbidden(let string):
                 print(string)
             case .notfound(let string):
                 print(string)
@@ -29,3 +32,33 @@ class AuthViewModel {
         }
     }
 }
+
+
+
+
+
+//class AuthViewModel {
+//    var phoneNumber = ""
+//    func authUser(phoneNumber: String, completion: @escaping ()->Void) {
+//        let string = phoneNumber
+//        let userData = ["phoneNumber": "\(phoneNumber)"].toData()
+//        NetworkManager().performRequest(urlRequest: ApiService.postAuthorizationUser(auth: userData).makeUrlRequest(), successModel: AuthorizationDTO.self) { [weak self] result in
+//            switch result {
+//            case .success(let model):
+//                print(model)
+//                self?.phoneNumber = string
+//                completion() // Вызов обработчика завершения после успешной регистрации
+//            case .failure(let error):
+//                print(error)
+//            case .unauthorized(let string):
+//                print(string)
+//            case .forbidden(let string):
+//                print(string)
+//            case .notfound(let string):
+//                print(string)
+//            case .badrequest(let string):
+//                print(string)
+//            }
+//        }
+//    }
+//}
