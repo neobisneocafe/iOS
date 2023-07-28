@@ -40,7 +40,7 @@ import FittedSheets
         case .QrCode:
             vc = UINavigationController()
         case .Locations:
-            vc = UINavigationController(rootViewController:LocationsViewController().self)
+            vc = UINavigationController(rootViewController:LocationsViewController(branchViewModel: LocationsViewModel()))
         case .Profile:
             vc = UINavigationController(rootViewController: ProfileViewController().self)
         }

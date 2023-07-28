@@ -37,36 +37,3 @@ func handleResponse(responseCode: Int) {
         print("Unknown Status Code")
     }
 }
-
-//enum NetworkError: Error {
-//    case unauthorized
-//    case badRequest
-//    case forbidden
-//    case notFound
-//    case serverError(String)
-//}
-
-
-
-//enum StatusCode {
-//    case success(description: String)
-//    case badRequest (description: String)
-//    case forbidden (description: String)
-//    case notFound (description: String)
-//    case unAuthorized (description: String)
-//
-//    var code: Int {
-//        switch self {
-//        case .success:
-//            return 200
-//        case .badRequest:
-//            return 400
-//        case .forbidden:
-//            return 403
-//        case .notFound:
-//            return 404
-//        case .unAuthorized:
-//            return 401
-//        }
-//    }
-//}

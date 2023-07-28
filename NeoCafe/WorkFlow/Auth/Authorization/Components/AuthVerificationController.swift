@@ -145,11 +145,12 @@ extension AuthVerificationController {
             self?.navigationController?.popViewController(animated: true)
         }
     }
-    
-    @objc func tapSendAgain() {
+    @objc func toComeInButtonTap() {
         guard let mainTextField = mainTextField.text  else { return }
         if !mainTextField.isEmpty  {
             authVerificationViewModel.authVerification(verificationCode: "") { verificationCode in
+//                DataStoreUserDefaults.shared.setAccessToken(verificationCode.accessToken)
+//                DataStoreUserDefaults.shared.setRefreshToken(verificationCode.refreshToken)
                 let vc = MainTabBarController()
                 DispatchQueue.main.async { [weak self] in
                     self?.navigationController?.pushViewController(vc, animated: true)
@@ -157,6 +158,9 @@ extension AuthVerificationController {
             }
         }
     }
-    @objc func toComeInButtonTap() {
+    
+    @objc func tapSendAgain() {
+        
     }
+   
 }

@@ -7,11 +7,10 @@
 
 import UIKit
 import SnapKit
-import SwiftyJSON
 
 class LocationsViewController: BaseViewController {
     
-//    var branch = [BranchDTO]()
+    var branch = [BranchDTO]()
     
     private lazy var backImage: UIImageView = {
         let iv = UIImageView()
@@ -57,7 +56,16 @@ class LocationsViewController: BaseViewController {
         view.backgroundColor = .white
         return view
     }()
-
+    
+    let branchViewModel: LocationsViewModel
+    init(branchViewModel: LocationsViewModel) {
+        self.branchViewModel = branchViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = .white
@@ -66,7 +74,8 @@ class LocationsViewController: BaseViewController {
         view.addSubview(pushButton)
         view.addSubview(branchLabel)
         view.addSubview(collection)
-//        fetcSpeakers()
+        configure()
+        
     }
     
     override func setupConstrains() {
@@ -94,35 +103,14 @@ class LocationsViewController: BaseViewController {
         }
     }
     
-//    func fetcSpeakers() {
-//        let url = URL(string: "https://neo-cafe-neobis-d301ec8e3f9a.herokuapp.com/api/branch")
-//        var request = URLRequest(url: url!)
-//        request.httpMethod = "GET"
-////        DataStoreUserDefaults.shared.setAccessToken(accessToken)
-//        request.setValue("Bearer \(DSGenerator.sharedInstance.getAccessToken()!)", forHTTPHeaderField: "Authorization")
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data, error == nil else  {
-//                print("Произошла ошибка при доступе к данным")
-//                return
-//            }
-//            let json = JSON(data)
-//            print(json)
-//            if let httpResponse = response as? HTTPURLResponse {
-//                    print(httpResponse.statusCode)
-//                }
-//            do {
-//                let branch  = try JSONDecoder().decode([BranchDTO].self, from: data)
-//                self.branch = branch
-//            }
-//            catch {
-//                print("Ошибка при декодировании Json в структуру Swift")
-//            }
-//            DispatchQueue.main.async { [weak self] in
-//                self?.collection.reloadData()  // обновляет таблицу
-//            }
-//        }
-//        task.resume()
-//    }
+    func configure() {
+        branchViewModel.fetchBranches {  [weak self] response in
+            self?.branch = response
+            DispatchQueue.main.async {
+                self?.collection.reloadData()
+            }
+        }
+    }
 }
 
 
@@ -130,14 +118,13 @@ class LocationsViewController: BaseViewController {
 
 extension LocationsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return branch.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationsCell.identifier, for: indexPath) as! LocationsCell
         cell.delegate = self
-//        cell.locationNameLabel.text = branch[indexPath.row].name
-//        cell.adressLabel.text = String(branch[indexPath.row].adress!)
+        cell.configure(with: branch[indexPath.row])
         return cell
     }
     
@@ -145,6 +132,7 @@ extension LocationsViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize { CGSize(width: screenWidth, height: 40) }
 }
+
 
 
 // MARK: - LocationsCellDelegate
@@ -169,20 +157,20 @@ extension LocationsViewController: LocationsCellDelegate {
         alertController.addAction(noAction)
         present(alertController, animated: true, completion: nil)
     }
-
+    
     func didTapPhoneNumBerButton() {
-         
-    }
-
+        
     }
     
-   
+}
+
+
 
 // MARK: - Selector
 
 extension LocationsViewController {
     @objc func backTap() {
-//        let vc = MainViewController()
+        //        let vc = MainViewController()
         navigationController?.popViewController(animated: true)
     }
     

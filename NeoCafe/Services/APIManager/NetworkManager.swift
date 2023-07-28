@@ -32,6 +32,7 @@ class NetworkManager {
         }
     }
     
+    
     func performRequest<T: Decodable>(urlRequest: URLRequest, successModel: T.Type, completion: @escaping (ProResult<T>) -> Void) {
         AF.request(urlRequest).responseDecodable(of: successModel.self) { response in
             switch response.result {

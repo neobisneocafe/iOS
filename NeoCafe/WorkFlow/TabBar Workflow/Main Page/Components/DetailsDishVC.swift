@@ -63,10 +63,10 @@ class DetailsDishVC: BaseViewController {
     }()
     private lazy var dishTableView: UITableView = {
         let tv = UITableView()
-        tv.backgroundColor = .white
+        tv.backgroundColor = UIColor(red: 0.254, green: 0.254, blue: 0.254, alpha: 1)
         tv.delegate = self
         tv.dataSource = self
-        tv.register(DishTableViewCell.self, forCellReuseIdentifier: CategoryMenuTableViewCell.identifier)
+        tv.register(DishTableViewCell.self, forCellReuseIdentifier: DishTableViewCell.identifier)
         tv.rowHeight = UITableView.automaticDimension
         return tv
     }()
@@ -81,7 +81,8 @@ class DetailsDishVC: BaseViewController {
         containerView.addSubview(nameLabel)
         containerView.addSubview(descripsionLabel)
         containerView.addSubview(niceAdditionLabel)
-        containerView.addSubview(dishTableView)
+        view.addSubview(dishTableView)
+//        containerView.addSubview(dishTableView)
     }
     
     override func setupConstrains() {
@@ -91,7 +92,7 @@ class DetailsDishVC: BaseViewController {
         }
         containerView.snp.makeConstraints {
             $0.edges.width.equalToSuperview()
-            $0.height.equalTo(1200)
+            $0.height.equalTo(1600)
         }
         dishImage.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(4))
@@ -114,15 +115,19 @@ class DetailsDishVC: BaseViewController {
             make.top.equalTo(descripsionLabel.snp.bottom).offset(32)
             make.leading.equalToSuperview().offset(computedWidth(16))
         }
-        
+        dishTableView.snp.makeConstraints { make in
+            make.top.equalTo(niceAdditionLabel.snp.bottom).offset(computedHeight(16))
+            make.leading.trailing.equalToSuperview().inset(computedWidth(0))
+            make.bottom.equalToSuperview().offset(computedHeight(-20))
+        }
     }
 }
 
-// MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource
 
 extension DetailsDishVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,7 +147,7 @@ extension DetailsDishVC:  UITableViewDelegate {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension DetailsDishVC {
     @objc private func backTap() {

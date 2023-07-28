@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
+import SwiftDate
 
 protocol LocationsCellDelegate: AnyObject {
     func didTapAppButton()
@@ -20,7 +22,7 @@ class LocationsCell: UICollectionViewCell {
     
      lazy var locationImage: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.isUserInteractionEnabled = true
         iv.image = UIImage(named: "locations")
         return iv
@@ -99,7 +101,6 @@ class LocationsCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     private func setupCollection() {
         setupViews()
         setupConstrains()
@@ -162,10 +163,13 @@ class LocationsCell: UICollectionViewCell {
             $0.height.width.equalTo(computedHeight(computedWidth(26)))
         }
     }
-//    func configure(with model: BranchDTO) {
-//        locationNameLabel.text = model.name
-//        adressLabel.text = model.adress
-//    }
+    func configure(with model: BranchDTO) {
+        locationNameLabel.text = model.name
+        adressLabel.text = model.adress
+        openingTimeLabel.text = model.openingTime?.toDate()?.toFormat("HH:mm")
+        closingTimeLabel.text = model.closingTime?.toDate()?.toFormat("HH:mm")
+        self.locationImage.kf.setImage(with: model.imageURL?.getURL())
+    }
 }
 
 

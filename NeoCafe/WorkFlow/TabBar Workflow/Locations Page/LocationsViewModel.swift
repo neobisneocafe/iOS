@@ -7,27 +7,26 @@
 
 import Foundation
 
-//class LocationsViewModel {
-//    var branches = [BranchDTO]()
-//
-//       func fetchBranches(completion: @escaping ()->()) {
-//           guard let url = URL(string: "https://neo-cafe-neobis-d301ec8e3f9a.herokuapp.com/api/branch") else { return }
-//           NetworkManager().performRequest(urlRequest: ApiService.postBranches.makeUrlRequest(), successModel: [BranchDTO].self) { [weak self] result in
-//               switch result {
-//               case .success(let models):
-//                   self?.branches = models
-//                   completion()
-//               case .failure(let error):
-//                   print(error)
-//               case .unauthorized(let string):
-//                   print(string)
-//               case .forbidden(let string):
-//                   print(string)
-//               case .notfound(let string):
-//                   print(string)
-//               case .badrequest(let string):
-//                   print(string)
-//               }
-//           }
-//       }
-//}
+class LocationsViewModel {
+    var branches = BranchResponse()
+
+       func fetchBranches(completion: @escaping (BranchResponse) -> Void) {
+           NetworkManager().performRequest(urlRequest: ApiService.getBranches.makeUrlRequest(), successModel: BranchResponse.self) { [weak self] result in
+               switch result {
+               case .success(let models):
+                   self?.branches = models
+                   completion(models)
+               case .failure(let error):
+                   print(error)
+               case .unauthorized(let string):
+                   print(string)
+               case .forbidden(let string):
+                   print(string)
+               case .notfound(let string):
+                   print(string)
+               case .badrequest(let string):
+                   print(string)
+               }
+           }
+       }
+}

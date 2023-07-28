@@ -15,7 +15,6 @@
 		F61E9D2F2A6A1828009CE510 /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61E9D2E2A6A1828009CE510 /* AccessTokenResponse.swift */; };
 		F61E9D322A6AE23A009CE510 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F61E9D312A6AE23A009CE510 /* Kingfisher */; };
 		F61E9D342A6B47F9009CE510 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61E9D332A6B47F9009CE510 /* DateFormatter.swift */; };
-		F61E9D372A6B63A8009CE510 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = F61E9D362A6B63A8009CE510 /* SwiftyJSON */; };
 		F64A023C2A3335F600D03959 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F64A023B2A3335F600D03959 /* IQKeyboardManagerSwift */; };
 		F64DC60F2A5AC451005D67A9 /* CategoryMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64DC60E2A5AC451005D67A9 /* CategoryMenuTableViewCell.swift */; };
 		F653C4AE2A64F268009CEC76 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F653C4AD2A64F268009CEC76 /* BaseRouter.swift */; };
@@ -75,6 +74,8 @@
 		F68F3FAD2A2EF6BD006E5C33 /* RegisterVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F3FAC2A2EF6BD006E5C33 /* RegisterVerificationController.swift */; };
 		F68F3FB32A2F13E5006E5C33 /* DateOfBirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F3FB22A2F13E5006E5C33 /* DateOfBirthViewController.swift */; };
 		F6A21D232A3880DA00DBDB66 /* FittedSheets in Frameworks */ = {isa = PBXBuildFile; productRef = F6A21D222A3880DA00DBDB66 /* FittedSheets */; };
+		F6B0EC562A6EE239006F1564 /* UpdateRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B0EC552A6EE239006F1564 /* UpdateRefreshToken.swift */; };
+		F6B0EC592A6EEC6E006F1564 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = F6B0EC582A6EEC6E006F1564 /* SwiftDate */; };
 		F6B1B9F42A5F028500C20D2B /* DetailsDishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B9F32A5F028500C20D2B /* DetailsDishVC.swift */; };
 		F6B1B9F62A5F212C00C20D2B /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B9F52A5F212C00C20D2B /* DishTableViewCell.swift */; };
 		F6B495B72A51ACB8007E37DA /* HistoryOfOrdersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B495B62A51ACB8007E37DA /* HistoryOfOrdersVC.swift */; };
@@ -158,6 +159,7 @@
 		F68F3FA92A2EEC62006E5C33 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
 		F68F3FAC2A2EF6BD006E5C33 /* RegisterVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVerificationController.swift; sourceTree = "<group>"; };
 		F68F3FB22A2F13E5006E5C33 /* DateOfBirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthViewController.swift; sourceTree = "<group>"; };
+		F6B0EC552A6EE239006F1564 /* UpdateRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRefreshToken.swift; sourceTree = "<group>"; };
 		F6B1B9F32A5F028500C20D2B /* DetailsDishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDishVC.swift; sourceTree = "<group>"; };
 		F6B1B9F52A5F212C00C20D2B /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
 		F6B495B62A51ACB8007E37DA /* HistoryOfOrdersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOfOrdersVC.swift; sourceTree = "<group>"; };
@@ -181,10 +183,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F61E9D372A6B63A8009CE510 /* SwiftyJSON in Frameworks */,
 				F68F3F882A2B4F28006E5C33 /* SnapKit in Frameworks */,
 				F653C4BF2A6501DD009CEC76 /* Alamofire in Frameworks */,
 				F6A21D232A3880DA00DBDB66 /* FittedSheets in Frameworks */,
+				F6B0EC592A6EEC6E006F1564 /* SwiftDate in Frameworks */,
 				F64A023C2A3335F600D03959 /* IQKeyboardManagerSwift in Frameworks */,
 				F61E9D322A6AE23A009CE510 /* Kingfisher in Frameworks */,
 			);
@@ -294,6 +296,7 @@
 				F653C4DC2A66FD0C009CEC76 /* RefreshTokenDTO.swift */,
 				F653C4E72A6942A8009CEC76 /* BranchDTO.swift */,
 				F61E9D2E2A6A1828009CE510 /* AccessTokenResponse.swift */,
+				F6B0EC552A6EE239006F1564 /* UpdateRefreshToken.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -629,7 +632,7 @@
 				F6A21D222A3880DA00DBDB66 /* FittedSheets */,
 				F653C4BE2A6501DD009CEC76 /* Alamofire */,
 				F61E9D312A6AE23A009CE510 /* Kingfisher */,
-				F61E9D362A6B63A8009CE510 /* SwiftyJSON */,
+				F6B0EC582A6EEC6E006F1564 /* SwiftDate */,
 			);
 			productName = NeoCafe;
 			productReference = F68F3F682A2B4715006E5C33 /* NeoCafe.app */;
@@ -665,7 +668,7 @@
 				F6A21D212A3880DA00DBDB66 /* XCRemoteSwiftPackageReference "FittedSheets" */,
 				F653C4BD2A6501DD009CEC76 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F61E9D302A6AE23A009CE510 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				F61E9D352A6B63A8009CE510 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				F6B0EC572A6EEC6E006F1564 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 			);
 			productRefGroup = F68F3F692A2B4715006E5C33 /* Products */;
 			projectDirPath = "";
@@ -710,6 +713,7 @@
 				F68F3F702A2B4715006E5C33 /* ViewController.swift in Sources */,
 				F653C4C12A6501F3009CEC76 /* NetworkManager.swift in Sources */,
 				F653C4B52A64F3A7009CEC76 /* NetworkErrors.swift in Sources */,
+				F6B0EC562A6EE239006F1564 /* UpdateRefreshToken.swift in Sources */,
 				F68F3F822A2B4B20006E5C33 /* LaunchScreenViewController.swift in Sources */,
 				F68F3F992A2D06B4006E5C33 /* BasicButton.swift in Sources */,
 				F653C4D92A6591C0009CEC76 /* AuthViewModel.swift in Sources */,
@@ -986,14 +990,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		F61E9D352A6B63A8009CE510 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		F64A023A2A3335F600D03959 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -1026,6 +1022,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		F6B0EC572A6EEC6E006F1564 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1033,11 +1037,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F61E9D302A6AE23A009CE510 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		F61E9D362A6B63A8009CE510 /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F61E9D352A6B63A8009CE510 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
 		};
 		F64A023B2A3335F600D03959 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1058,6 +1057,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F6A21D212A3880DA00DBDB66 /* XCRemoteSwiftPackageReference "FittedSheets" */;
 			productName = FittedSheets;
+		};
+		F6B0EC582A6EEC6E006F1564 /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F6B0EC572A6EEC6E006F1564 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

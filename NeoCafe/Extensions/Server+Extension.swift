@@ -18,3 +18,9 @@ extension Encodable {
         (try? JSONEncoder().encode(self)) ?? Data()
     }
 }
+
+extension String {
+    func getURL() -> URL? {
+        URL(string: self)
+    }
+}

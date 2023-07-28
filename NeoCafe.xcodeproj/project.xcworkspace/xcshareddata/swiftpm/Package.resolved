@@ -46,12 +46,12 @@
       }
     },
     {
-      "identity" : "swiftyjson",
+      "identity" : "swiftdate",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
+      "location" : "https://github.com/malcommac/SwiftDate",
       "state" : {
-        "revision" : "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
-        "version" : "5.0.1"
+        "revision" : "5d943224c3bb173e6ecf27295611615eba90c80e",
+        "version" : "7.0.0"
       }
     }
   ],

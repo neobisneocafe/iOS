@@ -12,9 +12,8 @@ enum ApiService: BaseRouterProtocol {
     case postActiveToken(phoneNumber: String, codeToConfirm: String)
     case postAuthorizationUser(auth: Data)
     case postAuthVerificationCode(code: String)
-
     case requestAccessToken(info: Data)
-    case postBranches
+    case getBranches
     
     var path: String {
         switch self {
@@ -35,7 +34,7 @@ enum ApiService: BaseRouterProtocol {
             return "/api/auth/refresh"
             
             
-        case .postBranches:
+        case .getBranches:
             return "/api/branch"
         }
     }
@@ -52,8 +51,8 @@ enum ApiService: BaseRouterProtocol {
             return .POST
         case .requestAccessToken:
             return .POST
-        case .postBranches:
-            return .POST
+        case .getBranches:
+            return .GET
         }
     }
     
@@ -64,8 +63,8 @@ enum ApiService: BaseRouterProtocol {
             //        case.postActiveToken(codeToConfirm: let token):
             //            return [URLQueryItem(name: "phoneNumber", "codeToConfirm", value: token)]
             //
-            //        case .postAuthVerificationCode(let token):
-            //            return [URLQueryItem(name: "verificationCode", value: token)]
+                    case .postAuthVerificationCode(let token):
+                        return [URLQueryItem(name: "verificationCode", value: token)]
         default: return nil
         }
     }
@@ -93,13 +92,15 @@ enum ApiService: BaseRouterProtocol {
         case .requestAccessToken(let info):
             return info
             
-        case .postBranches:
+        case .getBranches:
             return nil
         }
     }
     
     var httpHeaders: [HttpHeader]? {
         switch self {
+        case.getBranches:
+            return [HttpHeader(field: "Authorization", value: "Bearer \(DSGenerator.sharedInstance.getAccessToken()!)")]
             
         default: return nil
         }

@@ -16,6 +16,7 @@ class RegisterVerificationViewModel {
             switch result {
             case .success(let response):
                 completion(response.accessToken ?? "")
+                
             default:
                 break
             }

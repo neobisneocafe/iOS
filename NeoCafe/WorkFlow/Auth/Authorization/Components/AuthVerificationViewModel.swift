@@ -11,13 +11,15 @@ class AuthVerificationViewModel {
     
     var code = ""
     func authVerification(verificationCode: String, completion: @escaping (String) -> Void) {
-        NetworkManager().sendRequest(urlRequest: ApiService.postAuthVerificationCode(code: code).makeUrlRequest()) { response
-            in
-            switch response {
-            case .success(let string):
-                debugPrint(string)
-                self.code = string
-                completion(string)
+        NetworkManager().performRequest(urlRequest: ApiService.postAuthVerificationCode(code: verificationCode).makeUrlRequest(), successModel: RefreshToken.self) { result in
+            switch result {
+            case .success(let response):
+                // Сохраняем токены в хранилище данных UserDefaults
+                DataStoreUserDefaults.shared.setAccessToken(response.accessToken)
+                DataStoreUserDefaults.shared.setRefreshToken(response.refreshToken)
+                // Возвращаем токены в качестве результата
+                completion(response.accessToken ?? "")
+                completion(response.refreshToken ?? "")
             case .unauthorized(let string):
                 debugPrint(string)
             case .forbidden(let string):
@@ -33,34 +35,72 @@ class AuthVerificationViewModel {
     }
 }
 
-    
+
+
+
+
+
+//class AuthVerificationViewModel {
+//
 //    var code = ""
-//    func authorizationUser(codeToConfirm: String, completion: @escaping () -> Void) {
-//        let data = ["codeToConfirm": codeToConfirm]
-//        let urlRequest = ApiService.postAuthVerificationCode(token: data).makeUrlRequest()
-//        NetworkManager().performRequest(urlRequest: urlRequest, successModel: LoginResponse.self)                     { result in
+//    func authVerification(verificationCode: String, completion: @escaping (String) -> Void) {
+//        NetworkManager().performRequest(urlRequest: ApiService.postAuthVerificationCode(code: verificationCode).makeUrlRequest(), successModel: RefreshToken.self) { result in
 //            switch result {
-//            case .success(let model):
-//                print(model)
-//                completion()
+//            case .success(let response):
+////                DataStoreUserDefaults.shared.setAccessToken(response.accessToken)
+////                DataStoreUserDefaults.shared.setRefreshToken(response.refreshToken)
+//
+//                self.code = response.accessToken ?? ""
+//                self.code = response.refreshToken ?? ""
+//                completion(response.accessToken ?? "")
+//                completion(response.refreshToken ?? "")
 //            case .unauthorized(let string):
-//                print(string)
+//                debugPrint(string)
 //            case .forbidden(let string):
-//                print(string)
+//                debugPrint(string)
 //            case .notfound(let string):
-//                print(string)
+//                debugPrint(string)
 //            case .badrequest(let string):
-//                print(string)
-//            case .failerror(let string):
-//                print(string)
+//                debugPrint(string)
+//            case .failure(let string):
+//                debugPrint(string)
 //            }
 //        }
 //    }
-//
 //}
 
 
 
+
+//class AuthVerificationViewModel {
+//
+//    var code = ""
+//    func authVerification(verificationCode: String, completion: @escaping (String) -> Void) {
+//        NetworkManager().sendRequest(urlRequest: ApiService.postAuthVerificationCode(code: code).makeUrlRequest()) { response
+//            in
+//            switch response {
+//            case .success(let model):
+//                debugPrint(model)
+//                DSGenerator.sharedInstance.setAccessToken(model.accessTokenn)
+//                DSGenerator.sharedInstance.setRefreshToken(model.refreshToken)
+//                self.code = model
+//                completion()
+//            case .unauthorized(let string):
+//                debugPrint(string)
+//            case .forbidden(let string):
+//                debugPrint(string)
+//            case .notfound(let string):
+//                debugPrint(string)
+//            case .badrequest(let string):
+//                debugPrint(string)
+//            case .failure(let string):
+//                debugPrint(string)
+//            }
+//        }
+//    }
+//}
+
+    
 
 //class AuthVerificationViewModel {
 //
@@ -87,35 +127,3 @@ class AuthVerificationViewModel {
 //            }
 //        }
 //    }
-
-    
-    
-    //func authorizationUser(email: String, password: String, completion: @escaping ()->Void) {
-    //    let data = ["email": "\(email)",
-    //                "password": "\(password)"].toData()
-    //    NetworkManager().sendRequest(urlRequest: ApiService.loginUser(user: data).makeUrlRequest(), successModel: LoginResponse.self) { result in
-    //        switch result {
-    //        case .success(let model):
-    //            print(model)
-    //            DSGenerator.sharedInstance.setAccessToken(model.accessToken)
-    //            DSGenerator.sharedInstance.setRefreshToken(model.refreshToken)
-    //            completion()
-    //        case .unauthorized(let string):
-    //            print(string)
-    //        case .forebidden(let string):
-    //            print(string)
-    //        case .notfound(let string):
-    //            print(string)
-    //        case .badrequest(let string):
-    //            print(string)
-    //        case .failerror(let string):
-    //            print(string)
-    //        }
-    //    }
-    //}
-
-    
-    
-    
-    
- 

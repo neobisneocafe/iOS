@@ -3,4 +3,54 @@
    uuid = "622F7D58-307A-4958-9DEB-0AD22631B5C4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "909D4C63-55D3-4101-8411-1071EB0AF054"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NeoCafe/Services/APIManager/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "sendRequest(urlRequest:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "909D4C63-55D3-4101-8411-1071EB0AF054 - 477e826389991729"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String, Alamofire.AFError&gt;) -&gt; () in NeoCafe.NetworkManager.sendRequest(urlRequest: Foundation.URLRequest, completion: (NeoCafe.ProResult&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "NeoCafe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adinay/Desktop/NeoCafe/NeoCafe/Services/APIManager/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "264">
+               </Location>
+               <Location
+                  uuid = "909D4C63-55D3-4101-8411-1071EB0AF054 - 477e826389991729"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String, Alamofire.AFError&gt;) -&gt; () in NeoCafe.NetworkManager.sendRequest(urlRequest: Foundation.URLRequest, completion: (NeoCafe.ProResult&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "NeoCafe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adinay/Desktop/NeoCafe/NeoCafe/Services/APIManager/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "224">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
