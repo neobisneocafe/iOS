@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class CompletedOrderVC: BaseViewController {
+    
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "back"), for: .normal)

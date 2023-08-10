@@ -8,6 +8,10 @@
 import UIKit
 protocol HorizontalMenuCollectionViewDelegate: AnyObject {
   func didTapCellMenu(with index: Int)
+//    func horizontalMenuCollectionView(
+//        _ horizontalMenuCollectionView: HorizontalMenuCollectionView,
+//        didSelect categoryModel: CategoryModel
+//    )
 }
 
 class HorizontalMenuCollectionView: UICollectionView {

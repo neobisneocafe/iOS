@@ -20,9 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window  = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
-        launchApp()
         window.makeKeyAndVisible()
+        
+        // Проверка пользователя на авторизацию
+        if (DSGenerator.sharedInstance.getAccessToken()) != nil {
+            mainApp() // пользователь существует
+        } else {
+            launchApp() // пользователь не существует
+        }
+     
         return true
+        
+//        launchApp()
+//        window.makeKeyAndVisible()
+//        return true
     }
     
     func launchApp() {

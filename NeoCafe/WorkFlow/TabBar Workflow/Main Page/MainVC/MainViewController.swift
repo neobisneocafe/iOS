@@ -52,6 +52,20 @@ class MainViewController: BaseViewController {
     
     private let sections: [Section] = [.header, .menu, .popular]
     
+    private let viewModel = CategoryDishesViewModel()
+
+    private var categoryItems: [CategoryListItem] = []
+
+    // MARK: - LifeCycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.fetchCategory { [weak self] items in
+            self?.categoryItems = items
+            self?.collectionView.reloadData()
+        }
+    }
+    
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = .white
@@ -90,7 +104,7 @@ extension MainViewController: UICollectionViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 5
+            return categoryItems.count
         }
     }
     
@@ -102,7 +116,8 @@ extension MainViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath)
             return cell
         } else if section == .menu {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath)
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath) as? TestCell else { return UICollectionViewCell() }
+            cell.configure(imageUrl: categoryItems[safe: indexPath.row]?.imageUrl ?? nil)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath)
@@ -122,8 +137,7 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = CategoryMenuVC()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(MenuAssembly.create(), animated: true)
     }
 }
 
@@ -255,6 +269,6 @@ extension MainViewController {
 
 extension MainViewController {
     @objc func pushTap() {
-        
+       
     }
 }

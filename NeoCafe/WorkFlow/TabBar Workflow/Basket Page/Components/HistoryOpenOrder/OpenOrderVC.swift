@@ -9,6 +9,13 @@ import UIKit
 import SnapKit
 
 class OpenOrderVC: BaseViewController {
+    
+    // MARK: - Private Props
+    
+    private let viewModel = OpenOrderVM()
+    
+    private var items: [OpenOrderTableViewCell.Props] = []
+    
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "back"), for: .normal)
@@ -40,7 +47,9 @@ class OpenOrderVC: BaseViewController {
         tv.backgroundColor = .white
         tv.delegate = self
         tv.dataSource = self
-        tv.register(OpenOrderTableViewCell.self, forCellReuseIdentifier: OpenOrderTableViewCell.identifier)
+        tv.register(OpenOrderTableViewCell.self,
+                    forCellReuseIdentifier:
+                    OpenOrderTableViewCell.identifier)
         tv.rowHeight = UITableView.automaticDimension
         return tv
     }()
@@ -190,7 +199,7 @@ extension OpenOrderVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension OpenOrderVC {
     @objc func  backTap() {

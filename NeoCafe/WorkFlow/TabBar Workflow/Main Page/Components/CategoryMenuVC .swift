@@ -122,7 +122,7 @@ extension CategoryMenuVC: UITableViewDelegate {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension CategoryMenuVC {
     @objc private func backTap() {

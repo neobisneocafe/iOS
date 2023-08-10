@@ -7,8 +7,22 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class OpenOrderTableViewCell: UITableViewCell {
+    
+    // MARK: Props
+    
+    struct Props {
+        let isCompleted: Bool
+        let mainImageUrl: String?
+        let name: String
+        let price: String
+        let description: String
+        let sumTotal: String?
+        let date: String
+    }
+    
     static let identifier = "OpenOrderTableViewCell"
     
     private lazy var mainImage: UIImageView = {
@@ -66,6 +80,19 @@ class OpenOrderTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Public Methods
+
+    func render(_ props: Props) {
+        if let imageUrl = props.mainImageUrl {
+            mainImage.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "coffee"))
+        }
+        nameLabel.text = props.name
+        sumLabel.text = props.price
+        descriptionLabel.text = props.description
+        sumTotalLabel.text = props.price
+        stepperControl
     }
     
     private func setUp() {

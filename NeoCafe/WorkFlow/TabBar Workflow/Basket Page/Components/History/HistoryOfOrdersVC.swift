@@ -7,13 +7,19 @@
 
 import UIKit
 import SnapKit
+import SwiftDate
 
 class HistoryOfOrdersVC: BaseViewController {
     
-    enum SectionType: String {
+    enum SectionType: String, CaseIterable {
         case openOrder = "Открытый заказ"
-        case ongoing = "Завершенные"
+        case сompleted = "Завершенные"
     }
+    
+    // MARK: - Private Props
+    
+    private let viewModel = HistoryOfOrdersVM()
+    private var items: [HistoryOfOrdersTableViewCell.Props] = []
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
@@ -42,6 +48,11 @@ class HistoryOfOrdersVC: BaseViewController {
         return tv
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchData()
+    }
+    
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = .white
@@ -67,6 +78,24 @@ class HistoryOfOrdersVC: BaseViewController {
             $0.bottom.equalToSuperview().offset(computedHeight(-20))
         }
     }
+    
+    func fetchData() {
+        viewModel.fetchHistory { [weak self] response in
+            guard let self else { return }
+
+            items = response.map {
+                .init(
+                    isCompleted: $0.isCompleted ?? false,
+                    branchImageUrl: $0.branch?.imageUrl,
+                    branch: $0.branch?.name ?? "n/n",
+                    products: $0.dishes?.compactMap { $0.name }.joined(separator: ", ") ?? "n/n",
+                    date: $0.createdAt?.toDate()?.toFormat("dd MMMM", locale: Locales.russian) ?? "n/n"
+                )
+            }
+//            refreshTable()
+            mainTableView.reloadData()
+        }
+    }
 }
 
 
@@ -75,26 +104,47 @@ class HistoryOfOrdersVC: BaseViewController {
 
 extension HistoryOfOrdersVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch section {
+        case 0:
+            return items.filter({ $0.isCompleted == false  }).count
+
+        case 1:
+            return items.filter({ $0.isCompleted == true  }).count
+
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var item: HistoryOfOrdersTableViewCell.Props?
+
+        switch indexPath.section {
+        case 0:
+            item = items.filter({ $0.isCompleted == false })[indexPath.row]
+
+        case 1:
+            item = items.filter({ $0.isCompleted == true })[indexPath.row]
+
+        default:
+            return UITableViewCell()
+        }
+
+        guard let item else { return UITableViewCell() }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryOfOrdersTableViewCell.identifier, for: indexPath) as! HistoryOfOrdersTableViewCell
+        cell.render(item)
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // Возвращаем количество секций
-        return 2
+        return SectionType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // Возвращаем заголовок для каждой секции
-        if section == 0 {
-            return SectionType.openOrder.rawValue
-        } else {
-            return SectionType.ongoing.rawValue
-        }
+        SectionType.allCases[section].rawValue
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -120,3 +170,27 @@ extension HistoryOfOrdersVC {
         navigationController?.popViewController(animated: true)
     }
 }
+
+
+
+
+
+
+
+
+
+
+//private var completed : [HistoryOfOrdersTableViewCell.Props] {
+//    return items.filter({ $0.isCompleted })
+//
+//}
+//
+
+//    var completed =  [HistoryOfOrdersTableViewCell.Props]()
+//    var notCompleted =  [HistoryOfOrdersTableViewCell.Props]()
+    
+//    func refreshTable() {
+//        completed = items.filter({ $0.isCompleted })
+//        notCompleted = items.filter({!$0.isCompleted })
+//        mainTableView.reloadData()
+//    }

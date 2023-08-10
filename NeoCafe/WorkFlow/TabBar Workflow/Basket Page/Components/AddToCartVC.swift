@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FittedSheets
 
 class AddToCartVC: BaseViewController {
     private lazy var backButton: UIButton = {
@@ -107,7 +108,7 @@ class AddToCartVC: BaseViewController {
         button.addCornerRadius(30)
         button.setTitle("Возьму с собой", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = UIColor(named: "Color")
+        button.backgroundColor = UIColor(red: 0.931, green: 0.931, blue: 0.931, alpha: 1)
         button.addTarget(self, action: #selector(takeAwayTapped), for: .touchUpInside)
         return button
     }()
@@ -251,8 +252,11 @@ extension AddToCartVC {
     }
     
     @objc func inTheCafeTapped() {
-        let vc = QRCodeViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let qrCodeVC = UINavigationController(rootViewController: QRCodeViewController().self)
+        let controllerSheet = SheetViewController(controller: qrCodeVC, sizes: [.percent(0.8)])
+        controllerSheet.cornerRadius = 44
+        controllerSheet.allowPullingPastMaxHeight = false
+        present(controllerSheet, animated: true)
     }
     
     @objc func orderTapped() {

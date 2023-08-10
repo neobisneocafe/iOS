@@ -75,7 +75,6 @@ class LocationsViewController: BaseViewController {
         view.addSubview(branchLabel)
         view.addSubview(collection)
         configure()
-        
     }
     
     override func setupConstrains() {

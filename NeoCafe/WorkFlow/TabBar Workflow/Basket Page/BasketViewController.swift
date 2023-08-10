@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class BasketViewController: BaseViewController {
+    
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "back"), for: .normal)
@@ -40,6 +41,9 @@ class BasketViewController: BaseViewController {
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
         label.textAlignment = .center
         label.textColor = UIColor(named: "blue")
+        let addTapLabels = UITapGestureRecognizer(target: self, action: #selector(addTapHistoryTapped))
+        label.addGestureRecognizer(addTapLabels)
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -144,13 +148,17 @@ extension BasketViewController {
     @objc func pushTap() {
     }
     
+    @objc func addTapHistoryTapped() {
+        let vc = AddToCartVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func addTapHistory() {
         let vc = HistoryOfOrdersVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func menuTap () {
-        let vc = CategoryMenuVC()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(MenuAssembly.create(), animated: true)
     }
 }

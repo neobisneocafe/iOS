@@ -7,8 +7,17 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ProfileOrdersCollectionViewCell: UICollectionViewCell {
+    
+    struct Props {
+        let isCompleted: Bool
+        let branchImageUrl: String?
+        let branch: String
+        let products: String
+        let date: String
+    }
     
     static let identifier = "ProfileOrdersCollectionViewCell"
     
@@ -43,6 +52,18 @@ class ProfileOrdersCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         return label
     }()
+    
+    // MARK: - Public Methods
+
+    func render(_ props: Props) {
+        if let imageUrl = props.branchImageUrl {
+            branchImage.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "actual"))
+        }
+        branchLabel.text = props.branch
+        productsLabel.text = props.products
+        dateLabel.text = props.date
+    }
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -87,7 +108,6 @@ class ProfileOrdersCollectionViewCell: UICollectionViewCell {
             $0.height.equalTo(computedHeight(22))
         }
     }
-    
 }
 
 
@@ -100,33 +120,34 @@ extension ProfileViewController {
     class Header: UICollectionReusableView {
         private lazy var titleLabel: UILabel = {
             let label = UILabel()
-            label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+            label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
             label.text = "Актуальный заказ"
             label.textColor = UIColor(named: "blue")
             return label
         }()
-        
+
         override func layoutSubviews() {
             super.layoutSubviews()
             setUp()
         }
-        
+
         func display(with text: HeaderType) {
             titleLabel.text = text.rawValue
         }
-        
+
         private func setUp() {
             setUpSubviews()
             setUpConstaints()
         }
-        
+
         private func setUpSubviews() {
             addSubview(titleLabel)
         }
-        
+
         private func setUpConstaints () {
             titleLabel.snp.makeConstraints { make in
-                make.top.leading.equalToSuperview().offset(computedWidth(16))
+                make.top.equalToSuperview().offset(24)
+                make.leading.equalToSuperview().offset(computedWidth(16))
                 make.trailing.bottom.equalToSuperview().offset(-16)
             }
         }

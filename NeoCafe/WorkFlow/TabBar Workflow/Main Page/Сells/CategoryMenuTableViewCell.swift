@@ -103,12 +103,12 @@ class CategoryMenuTableViewCell: UITableViewCell {
             $0.width.equalTo(computedWidth(94))
         }
         
-        func configure(with model: MenuCategory) {
-            self.iv.image = UIImage(named: model.image_Url ?? "")
-            self.nameLabel.text = model.title
-            self.descriptionLabel.text = model.discriptionTitle
-            self.priceLabel.text = model.price
-        }
+//        func configure(with model: MenuCategory) {
+//            self.iv.image = UIImage(named: model.image_Url ?? "")
+//            self.nameLabel.text = model.title
+//            self.descriptionLabel.text = model.discriptionTitle
+//            self.priceLabel.text = model.price
+//        }
     }
 }
 

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftDate
 
 class ProfileViewController: BaseViewController {
     private lazy var backButton: UIButton = {
@@ -26,36 +27,6 @@ class ProfileViewController: BaseViewController {
         return label
     }()
     
-    private lazy var logOutButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.init(named: "signOut"), for: .normal)
-        button.addTarget(self, action: #selector(tapLogOut), for: .touchUpInside)
-        button.isUserInteractionEnabled = true
-        return button
-    }()
-    
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width, height: 105)
-        layout.minimumLineSpacing = 10
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.delegate = self
-        view.dataSource = self
-        view.registerReusableView(ViewType: BonusCollectionViewCell.self,  type: .UICollectionElementKindSectionHeader)
-        view.registerCollectionReusable(CellType: ProfileOrdersCollectionViewCell.self)
-                view.registerReusableView(ViewType: Header.self, type: .UICollectionElementKindSectionHeader)
-        view.backgroundColor = .white
-        return view
-    }()
-    
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        label.textAlignment = .left
-        label.textColor = UIColor(named: "blue")!
-        label.text = "Себастьян"
-        return label
-    }()
     private lazy var editImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -67,14 +38,51 @@ class ProfileViewController: BaseViewController {
         return iv
     }()
     
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        label.textAlignment = .left
+        label.textColor = UIColor(named: "blue")!
+        label.text = "Себастьян"
+        return label
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 105)
+        layout.minimumLineSpacing = 10
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.delegate = self
+        view.dataSource = self
+        view.registerReusableView(ViewType: BonusCollectionViewCell.self,
+                                  type: .UICollectionElementKindSectionHeader)
+        
+        view.registerCollectionReusable(CellType: ProfileOrdersCollectionViewCell.self)
+        
+        view.registerReusableView(ViewType: Header.self,
+                                  type: .UICollectionElementKindSectionHeader)
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    // MARK: - Private Props
+    
+    private let viewModel = ProfileOrderViewModel()
+    
+    private var items: [ProfileOrdersCollectionViewCell.Props] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchOrdersData()
+    }
+    
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = .white
         view.addSubview(backButton)
         view.addSubview(profileLabel)
-        view.addSubview(logOutButton)
-        view.addSubview(nameLabel)
         view.addSubview(editImage)
+        view.addSubview(nameLabel)
         view.addSubview(collectionView)
     }
     
@@ -86,69 +94,90 @@ class ProfileViewController: BaseViewController {
         }
         profileLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(computedHeight(40))
-            $0.leading.equalTo(backButton.snp.leading).offset(computedWidth(132))
+            $0.leading.equalTo(backButton.snp.leading).offset(computedWidth(126))
             $0.height.equalTo(computedHeight(40))
         }
-        logOutButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(computedHeight(50))
+        editImage.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(computedHeight(46))
             $0.trailing.equalToSuperview().inset(computedWidth(20))
+            $0.height.width.equalTo(36)
         }
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(86))
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(58))
             $0.leading.equalToSuperview().offset(computedWidth(16))
             $0.height.equalTo(computedHeight(24))
         }
-        editImage.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(90))
-            $0.trailing.equalToSuperview().offset(computedWidth(-200))
-        }
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(computedHeight(16))
+            $0.top.equalTo(nameLabel.snp.bottom).offset(computedHeight(4))
             $0.bottom.trailing.leading.equalToSuperview()
+        }
+    }
+    
+    func fetchOrdersData () {
+        viewModel.fetchOrders { [weak self] response in
+            guard let self else { return }
+
+            items = response.map {
+                .init(
+                    isCompleted: $0.isCompleted ?? false,
+                    branchImageUrl: $0.branch?.imageUrl,
+                    branch: $0.branch?.name ?? "n/n",
+                    products: $0.dishes?.compactMap { $0.name }.joined(separator: ", ") ?? "n/n",
+                    date: $0.createdAt?.toDate()?.toFormat("dd MMMM", locale: Locales.russian) ?? "n/n"
+                )
+            }
+            collectionView.reloadData()
         }
     }
 }
 
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+      return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
+            return items.filter({ !$0.isCompleted} ).count
+        case 1:
+            return items.filter({ $0.isCompleted  }).count
+        default:
             return 0
-//        } else if section == 1 {
-////            return currentOrders.count
         }
-        return 3
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueIdentifiableCell(ProfileOrdersCollectionViewCell.self, for: indexPath)
-        if indexPath.section == 0 {
-            let cell = UICollectionViewCell()
-            return cell
-        } else if indexPath.section == 1 {
-//            cell.display([indexPath.row])
-            return cell
-        } else {
-//            cell.display(completedOrders[indexPath.row])
-            return cell
-        }
+    var item: ProfileOrdersCollectionViewCell.Props?
+        
+    switch indexPath.section {
+    case 0:
+        item = items.filter({ $0.isCompleted == false })[indexPath.row]
+    case 1:
+        item = items.filter({ $0.isCompleted == true })[indexPath.row]
+
+    default:
+        return UICollectionViewCell()
     }
+    guard let item else { return UICollectionViewCell() }
+
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileOrdersCollectionViewCell.identifier, for: indexPath) as! ProfileOrdersCollectionViewCell
+    cell.render(item)
+    return cell
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeuReusableView(ViewType: Header.self, type: .UICollectionElementKindSectionHeader, for: indexPath)
         if indexPath.section == 0 {
             
-            let headerView = collectionView.dequeuReusableView(ViewType: BonusCollectionViewCell.self, type: .UICollectionElementKindSectionHeader, for: indexPath)
-//            headerView.delegate = self
-//            headerView.display(bonus: bonus)
+    let headerView = collectionView.dequeuReusableView(ViewType: BonusCollectionViewCell.self, type: .UICollectionElementKindSectionHeader, for: indexPath)
             return headerView
-        } else if indexPath.section == 1 {
+            
+        } else if indexPath.section == 0 {
             header.display(with: .current)
             return header
         }
@@ -169,16 +198,13 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension ProfileViewController {
     @objc func backTap() {
-        print("asd")
-        
+        print("backTap")
     }
-    @objc func tapLogOut() {
-        print("gkfp")
-    }
+    
     @objc func tapEdit() {
         let vc = ProfileEditViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -186,32 +212,3 @@ extension ProfileViewController {
     }
 }
 
-
-
-
-    //        } else if indexPath.section == 1 {
-    //            let cell = tableView.dequeueIdentifiableCell(ProfileOrdersTableViewCell.self, for: indexPath)
-    //            return cell
-    //        } else {
-    //            let cell = tableView.dequeueIdentifiableCell(ProfileOrdersTableViewCell.self, for: indexPath)
-    //            return cell
-    //        }
-//}
-
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) ->  UIView? {
-//        if section == 0 {
-//            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Header") as! Header
-//            return headerView
-//        }
-//    }; else if section == 1 {
-//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BonusTableViewCell") as! BonusTableViewCell
-//
-//        return headerView
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 0 {
-//            return 0
-//        } else if section == 1 {
-//        }
-//    }

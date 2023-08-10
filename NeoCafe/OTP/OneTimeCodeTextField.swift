@@ -79,7 +79,7 @@ final class OneTimeCodeTextField: UITextField {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension OneTimeCodeTextField {
     @objc private func textDidChange() {

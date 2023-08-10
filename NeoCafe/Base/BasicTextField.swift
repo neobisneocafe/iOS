@@ -39,7 +39,6 @@ final class BasicTextField: UITextField {
         layer.shadowOffset = CGSize(width: 0, height: 1)
     }
     
-    
     func setupConstrains(){
         snp.makeConstraints{
             $0.height.equalTo(computedHeight(56))

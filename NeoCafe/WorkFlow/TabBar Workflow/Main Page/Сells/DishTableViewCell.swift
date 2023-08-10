@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+import Kingfisher
 
 protocol DishTableViewCellDelegate: AnyObject {
     func updateItems(count: Int)
@@ -16,7 +18,7 @@ class DishTableViewCell: UITableViewCell {
     
     weak var delegate: DishTableViewCellDelegate?
     
-    public lazy var iv: UIImageView = {
+    public lazy var nameImage: UIImageView = {
         let iv = UIImageView()
         iv.addCornerRadius(22)
         iv.contentMode = .scaleAspectFit
@@ -57,46 +59,42 @@ class DishTableViewCell: UITableViewCell {
         stepper.delegate = self
         return stepper
     }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     private func setUp() {
         setupViews()
         setupConstrains()
     }
     private func setupViews() {
         contentView.backgroundColor = UIColor(red: 0.254, green: 0.254, blue: 0.254, alpha: 1)
-        contentView.addSubview(iv)
+        contentView.addSubview(nameImage)
         contentView.addSubview(stepperControl)
         contentView.addSubview(nameLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(priceLabel)
     }
-    
     private func setupConstrains() {
-        iv.snp.makeConstraints { make in
+        nameImage.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(computedHeight(0))
             make.leading.equalToSuperview().inset(computedWidth(16))
             make.height.equalTo(computedHeight(88))
         }
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(computedHeight(8))
-            make.leading.equalTo(iv.snp.trailing).offset(computedWidth(14))
+            make.leading.equalTo(nameImage.snp.trailing).offset(computedWidth(14))
         }
         descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.bottom).offset(computedHeight(8))
-            $0.leading.equalTo(iv.snp.trailing).offset(computedWidth(14))
+            $0.leading.equalTo(nameImage.snp.trailing).offset(computedWidth(14))
         }
         priceLabel.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(computedHeight(8))
-            $0.leading.equalTo(iv.snp.trailing).offset(computedWidth(14))
+            $0.leading.equalTo(nameImage.snp.trailing).offset(computedWidth(14))
         }
         stepperControl.snp.makeConstraints {
             $0.top.equalToSuperview().offset(computedHeight(50))
@@ -105,7 +103,15 @@ class DishTableViewCell: UITableViewCell {
             $0.width.equalTo(computedWidth(94))
         }
     }
+//    func configure(with model: DishesDTO) {
+//        self.nameImage.kf.setImage(with: model.meta?.getURL())
+//        nameLabel.text = model.data
+//        descriptionLabel.text = model.data?.description
+//        priceLabel.text = model.
+//
+//    }
 }
+
 
 
 // MARK: - HidableStepperDelegate

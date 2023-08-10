@@ -34,6 +34,15 @@ class ProfileEditViewController: BaseViewController {
         label.text = "Редактирование"
         return label
     }()
+    
+    private lazy var logOutButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(named: "signOut"), for: .normal)
+        button.addTarget(self, action: #selector(tapLogOut), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
+        return button
+    }()
+    
     private lazy var mainStackView: UIStackView = {
         let sv = UIStackView()
         sv.spacing = 20
@@ -105,6 +114,7 @@ class ProfileEditViewController: BaseViewController {
         view.addSubview(backButton)
         view.addSubview(editleLabel)
         view.addSubview(editProfileleLabel)
+        view.addSubview(logOutButton)
         view.addSubview(mainStackView)
         view.addSubview(nameTextField)
         view.addSubview(nameImage)
@@ -126,13 +136,17 @@ class ProfileEditViewController: BaseViewController {
             $0.leading.equalToSuperview().offset(computedWidth(24))
         }
         editleLabel.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(computedHeight(40))
+            make.top.equalToSuperview().offset(computedHeight(38))
             make.leading.equalTo(backButton.snp.leading).offset(computedWidth(58))
             make.height.equalTo(computedHeight(40))
         }
         editProfileleLabel.snp.makeConstraints { make in
-            make.top.equalTo(editleLabel.snp.bottom).offset(computedHeight(30))
+            make.top.equalTo(editleLabel.snp.bottom).offset(computedHeight(26))
             make.leading.equalTo(computedWidth(16))
+        }
+        logOutButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(12))
+            $0.trailing.equalToSuperview().offset(computedWidth(-16))
         }
         mainStackView.snp.makeConstraints {
             $0.top.equalTo(editProfileleLabel.snp.bottom).offset(computedHeight(34))
@@ -162,6 +176,30 @@ extension ProfileEditViewController {
     @objc func backTap() {
         navigationController?.popViewController(animated: true)
        print("назад")
+    }
+    
+    @objc func tapLogOut() {
+        let alert = UIAlertController(
+            title: "Выход из учетной записи",
+            message: "Вы уверены, что хотите выйти из своей учетной записи?",
+            preferredStyle: .alert)
+
+            let cancelAction = UIAlertAction(
+                title: "Отмена",
+                style: .cancel) { _ in
+                // Do nothing
+            }
+
+            let signOutAction = UIAlertAction(
+                title: "Выйти",
+                style: .destructive) { _ in
+                // Sign out of the account
+                DSGenerator.sharedInstance.removeAll()
+                self.appDelegate.launchApp()
+            }
+            alert.addAction(cancelAction)
+            alert.addAction(signOutAction)
+            present(alert, animated: true, completion: nil)
     }
     
     @objc func saveTap() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftBoost
 import SnapKit
 
 protocol DetailsDishVCDelegate: AnyObject {

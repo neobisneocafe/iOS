@@ -14,6 +14,8 @@ enum ApiService: BaseRouterProtocol {
     case postAuthVerificationCode(code: String)
     case requestAccessToken(info: Data)
     case getBranches
+    case getDishes
+    case сhangePassword(firstName:String, phoneNumber: String)
     
     var path: String {
         switch self {
@@ -36,6 +38,12 @@ enum ApiService: BaseRouterProtocol {
             
         case .getBranches:
             return "/api/branch"
+            
+        case .getDishes:
+            return "/api/dishes/list"
+            
+        case .сhangePassword:
+            return "/api/user/update/profile"
         }
     }
     
@@ -53,6 +61,10 @@ enum ApiService: BaseRouterProtocol {
             return .POST
         case .getBranches:
             return .GET
+        case .getDishes:
+            return .GET
+        case .сhangePassword:
+            return .PATCH
         }
     }
     
@@ -94,13 +106,22 @@ enum ApiService: BaseRouterProtocol {
             
         case .getBranches:
             return nil
+            
+        case .getDishes:
+            return nil
+        case .сhangePassword(let firstName, let phoneNumber):
+            return [
+                "firstName": firstName,
+                "phoneNumber": phoneNumber
+            ].toData()
         }
     }
     
+    
     var httpHeaders: [HttpHeader]? {
         switch self {
-        case.getBranches:
-            return [HttpHeader(field: "Authorization", value: "Bearer \(DSGenerator.sharedInstance.getAccessToken()!)")]
+//        case .сhangePassword:
+//            return [HttpHeader(field: "Authorization", value: "Bearer \(DSGenerator.sharedInstance.getAccessToken()!)")]
             
         default: return nil
         }

@@ -7,8 +7,18 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class HistoryOfOrdersTableViewCell: UITableViewCell {
+    
+    struct Props {
+        let isCompleted: Bool
+        let branchImageUrl: String?
+        let branch: String
+        let products: String
+        let date: String
+    }
+    
     static let identifier = "HistoryOfOrdersTableViewCell"
     
     private lazy var branchImage: UIImageView = {
@@ -43,6 +53,8 @@ class HistoryOfOrdersTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - LifeCycle
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
@@ -51,6 +63,19 @@ class HistoryOfOrdersTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Public Methods
+
+    func render(_ props: Props) {
+        if let imageUrl = props.branchImageUrl {
+            branchImage.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "actual"))
+        }
+        branchLabel.text = props.branch
+        productsLabel.text = props.products
+        dateLabel.text = props.date
+    }
+    
+    // MARK: - Private Methods
     
     private func setUp() {
         setupViews()
@@ -66,10 +91,16 @@ class HistoryOfOrdersTableViewCell: UITableViewCell {
     }
     
     private func setupConstrains() {
-        branchImage.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(computedHeight(8))
-            $0.leading.equalToSuperview().offset(computedWidth(16))
-            $0.bottom.equalToSuperview().offset(computedHeight(-8))
+        branchImage.snp.makeConstraints {make in 
+            branchImage.snp.makeConstraints {
+                $0.top.leading.bottom.equalToSuperview().inset(
+                    UIEdgeInsets(
+                        top: 8.0,
+                        left: 16.0,
+                        bottom: 8.0,
+                        right: 0.0))
+                $0.size.equalTo(89)
+            }
         }
         branchLabel.snp.makeConstraints {
             $0.top.equalTo(branchImage).offset(computedHeight(20))
