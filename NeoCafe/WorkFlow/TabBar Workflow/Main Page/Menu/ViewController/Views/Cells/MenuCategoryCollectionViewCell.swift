@@ -66,19 +66,19 @@ extension MenuCategoryCollectionViewCell {
 // MARK: - Private Methods
 
 private extension MenuCategoryCollectionViewCell {
-    /// Настройка View
+    // Настройка View
     func setup() {
         backgroundColor = .clear
 
         roundCorners(curve: .continuous, radius: frame.height / 2)
     }
 
-    /// Добавление Views
+    // Добавление Views
     func setupViews() {
         addSubview(mainLabel)
     }
 
-    /// Установка констреинтов
+    // Установка констреинтов
     func setupConstraints() {
         mainLabel.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0))

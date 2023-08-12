@@ -179,27 +179,8 @@ extension ProfileEditViewController {
     }
     
     @objc func tapLogOut() {
-        let alert = UIAlertController(
-            title: "Выход из учетной записи",
-            message: "Вы уверены, что хотите выйти из своей учетной записи?",
-            preferredStyle: .alert)
-
-            let cancelAction = UIAlertAction(
-                title: "Отмена",
-                style: .cancel) { _ in
-                // Do nothing
-            }
-
-            let signOutAction = UIAlertAction(
-                title: "Выйти",
-                style: .destructive) { _ in
-                // Sign out of the account
-                DSGenerator.sharedInstance.removeAll()
-                self.appDelegate.launchApp()
-            }
-            alert.addAction(cancelAction)
-            alert.addAction(signOutAction)
-            present(alert, animated: true, completion: nil)
+        signOutProfileAlert()
+        print("Выход из Системы Приложение)))")
     }
     
     @objc func saveTap() {

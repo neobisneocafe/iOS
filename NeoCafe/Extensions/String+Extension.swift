@@ -50,15 +50,23 @@ extension ProfileEditViewController {
             title: "Выход из учетной записи",
             message: "Вы уверены, что хотите выйти из своей учетной записи?",
             preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Да", style: .default))
-        alert.addAction(UIAlertAction(title: "Нет", style: .cancel))
-        present(alert, animated: true)
+        
+        let cancelAction = UIAlertAction(
+            title: "Отмена",
+            style: .cancel) { _ in
+                // Do nothing
+            }
+        
+        let signOutAction = UIAlertAction(
+            title: "Выйти",
+            style: .destructive) { _ in
+                // Sign out of the account
+                DSGenerator.sharedInstance.removeAll()
+                self.appDelegate.launchApp()
+            }
+        alert.addAction(cancelAction)
+        alert.addAction(signOutAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 
-
-
-//        DSGenerator.sharedInstance.removeAll()  // Удаление Пользователя
-//        self.appDelegate.launchApp()
-//        signOutProfileAlert()
-//        print("tapLogOut")

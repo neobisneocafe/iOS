@@ -90,7 +90,7 @@ final class MenuViewController: UIViewController {
                                     imageUrl: $0.image?.url ?? "",
                                     title: $0.name ?? "",
                                     description: $0.description ?? "",
-                                    price: $0.price ?? ""
+                                    price: "\($0.price ?? 0)"
                                 )
                             )
                         }

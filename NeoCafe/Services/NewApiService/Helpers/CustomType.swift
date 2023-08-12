@@ -25,5 +25,3 @@ extension CustomType {
         ]
     }
 }
-
-// swiftlint:enable force_unwrapping

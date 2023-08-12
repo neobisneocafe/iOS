@@ -12,7 +12,7 @@ import FittedSheets
     case Home
     case Basket
     case QrCode
-    case Locations
+    case Branch
     case Profile
     
     var tabBarItem: UITabBarItem {
@@ -23,7 +23,7 @@ import FittedSheets
             return UITabBarItem(title: nil, image: UIImage(named: "basket"), selectedImage: nil)
         case .QrCode:
             return UITabBarItem(title: nil, image: UIImage(), selectedImage: nil)
-        case .Locations:
+        case .Branch:
             return UITabBarItem(title: nil, image: UIImage(named: "location"), selectedImage: nil)
         case .Profile:
             return UITabBarItem(title: nil, image: UIImage(named: "profile"), selectedImage: nil)
@@ -39,8 +39,8 @@ import FittedSheets
             vc = UINavigationController(rootViewController: BasketViewController().self)
         case .QrCode:
             vc = UINavigationController()
-        case .Locations:
-            vc = UINavigationController(rootViewController:LocationsViewController(branchViewModel: LocationsViewModel()))
+        case .Branch:
+            vc = UINavigationController(rootViewController:BranchViewController(branchViewModel: LocationsViewModel()))
         case .Profile:
             vc = UINavigationController(rootViewController: ProfileViewController().self)
         }

@@ -80,17 +80,17 @@ extension MenuDishesCollectionViewCell {
 // MARK: - Private Methods
 
 private extension MenuDishesCollectionViewCell {
-    /// Настройка View
+    // Настройка View
     func setup() {
         backgroundColor = .clear
     }
 
-    /// Добавление Views
+    // Добавление Views
     func setupViews() {
         addSubviews(imageView, labelsStackView)
     }
 
-    /// Установка констреинтов
+    // Установка констреинтов
     func setupConstraints() {
         imageView.snp.makeConstraints {
             $0.leading.top.bottom.equalToSuperview()

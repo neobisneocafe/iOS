@@ -14,7 +14,7 @@ protocol HidableStepperDelegate: AnyObject {
     func updateValue(with count: Int)
 }
 
-class RoundStepperView: UIControl {
+final class RoundStepperView: UIControl {
     weak var delegate: HidableStepperDelegate?
     
     public enum ButtonType {
@@ -43,27 +43,27 @@ class RoundStepperView: UIControl {
         sharedInit()
     }
     
-    lazy var decreaseButton: UIButton = {
+    private lazy var decreaseButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(decrease), for: [.touchDragExit, .touchCancel, .touchUpInside, .touchUpOutside])
         button.setTitle(" - ", for: .normal)
         return button
     }()
     
-    lazy var additionButton: UIButton = {
+    private lazy var additionButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(add), for: [.touchDragExit, .touchCancel, .touchUpInside, .touchUpOutside])
         button.setTitle(" + ", for: .normal)
         return button
     }()
     
-    lazy var spacerView: UIView = {
+    private lazy var spacerView: UIView = {
         let spacerView: UIView = UIView()
         spacerView.backgroundColor = stepperBackgroundColor
         return spacerView
     }()
     
-    lazy var quantityOfItemsLabel: UILabel = {
+    private lazy var quantityOfItemsLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = quantityOfItemsUnityOfMeasure

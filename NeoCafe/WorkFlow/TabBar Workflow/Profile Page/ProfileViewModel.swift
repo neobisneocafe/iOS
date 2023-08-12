@@ -11,10 +11,10 @@ final class ProfileOrderViewModel {
     
     private let apiService: BasketApiSubServiceProtocol = NewApiService.shared
 
-    func fetchOrders(completion: @escaping @MainActor (BasketOrdersResponse) -> Void) {
+    func fetchOrders(completion: @escaping @MainActor (BasketHistoryResponse) -> Void) {
         Task {
             do {
-                let response = try await apiService.fetchOrders()
+                let response = try await apiService.fetchHistory()
                 await completion(response)
             } catch {
                 debugPrint(error)

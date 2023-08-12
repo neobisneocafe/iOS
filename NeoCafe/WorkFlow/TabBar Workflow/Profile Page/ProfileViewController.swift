@@ -33,7 +33,7 @@ class ProfileViewController: BaseViewController {
         iv.image = UIImage(systemName: "square.and.pencil.circle.fill")
         iv.isUserInteractionEnabled = true
         let imageTap = UITapGestureRecognizer(target: self,
-                                             action: #selector(tapEdit))
+                                              action: #selector(tapEdit))
         iv.addGestureRecognizer((imageTap))
         return iv
     }()
@@ -68,7 +68,6 @@ class ProfileViewController: BaseViewController {
     // MARK: - Private Props
     
     private let viewModel = ProfileOrderViewModel()
-    
     private var items: [ProfileOrdersCollectionViewCell.Props] = []
     
     override func viewDidLoad() {
@@ -116,7 +115,7 @@ class ProfileViewController: BaseViewController {
     func fetchOrdersData () {
         viewModel.fetchOrders { [weak self] response in
             guard let self else { return }
-
+            
             items = response.map {
                 .init(
                     isCompleted: $0.isCompleted ?? false,
@@ -136,14 +135,14 @@ class ProfileViewController: BaseViewController {
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-      return 3
+        return items.filter({ $0.isCompleted  }).isEmpty ? 2 : 3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return items.filter({ !$0.isCompleted} ).count
         case 1:
+            return items.filter({ !$0.isCompleted} ).count
+        case 2:
             return items.filter({ $0.isCompleted  }).count
         default:
             return 0
@@ -151,22 +150,22 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    var item: ProfileOrdersCollectionViewCell.Props?
+        var item: ProfileOrdersCollectionViewCell.Props?
         
-    switch indexPath.section {
-    case 0:
-        item = items.filter({ $0.isCompleted == false })[indexPath.row]
-    case 1:
-        item = items.filter({ $0.isCompleted == true })[indexPath.row]
-
-    default:
-        return UICollectionViewCell()
-    }
-    guard let item else { return UICollectionViewCell() }
-
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileOrdersCollectionViewCell.identifier, for: indexPath) as! ProfileOrdersCollectionViewCell
-    cell.render(item)
-    return cell
+        switch indexPath.section {
+        case 1:
+            item = items.filter({ $0.isCompleted == false })[indexPath.row]
+        case 2:
+            item = items.filter({ $0.isCompleted == true })[indexPath.row]
+            
+        default:
+            return UICollectionViewCell()
+        }
+        guard let item else { return UICollectionViewCell() }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileOrdersCollectionViewCell.identifier, for: indexPath) as! ProfileOrdersCollectionViewCell
+        cell.render(item)
+        return cell
         
     }
     
@@ -174,10 +173,10 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         let header = collectionView.dequeuReusableView(ViewType: Header.self, type: .UICollectionElementKindSectionHeader, for: indexPath)
         if indexPath.section == 0 {
             
-    let headerView = collectionView.dequeuReusableView(ViewType: BonusCollectionViewCell.self, type: .UICollectionElementKindSectionHeader, for: indexPath)
+            let headerView = collectionView.dequeuReusableView(ViewType: BonusCollectionViewCell.self, type: .UICollectionElementKindSectionHeader, for: indexPath)
             return headerView
             
-        } else if indexPath.section == 0 {
+        } else if indexPath.section == 1 {
             header.display(with: .current)
             return header
         }

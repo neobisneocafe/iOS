@@ -12,7 +12,7 @@ class DataStoreUserDefaults: UserDefaultsDataStoreProtocol {
     static let shared = DataStoreUserDefaults()
     private  let userDefaults = UserDefaults.standard
     
-    // MARK: - Ключи для access rerfresh Id Токенов
+    // MARK: - Ключи для access rerfresh Токенов
     
     private let pAccessToken = "AccessToken"
     private let pRefreshToken = "RefreshToken"

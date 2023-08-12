@@ -127,7 +127,7 @@ public struct BasketHistoryDish: Codable, Equatable {
     public let updatedAt: String?
     public let name: String?
     public let description: String?
-    public let price: String?
+    public let price: Int?
     public let isDeleted: Bool?
 
     enum CodingKeys: String, CodingKey {
@@ -146,7 +146,7 @@ public struct BasketHistoryDish: Codable, Equatable {
         updatedAt: String?,
         name: String?,
         description: String?,
-        price: String?,
+        price: Int?,
         isDeleted: Bool?
     ) {
         self.id = id

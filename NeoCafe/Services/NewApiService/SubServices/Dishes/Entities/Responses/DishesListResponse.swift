@@ -28,7 +28,7 @@ public struct DishesListItem: Codable, Equatable {
     public let updatedAt: String?
     public let name: String?
     public let description: String?
-    public let price: String?
+    public let price: Int?
     public let isDeleted: Bool?
     public let image: DishesListImage?
     public let category: DishesListCategory?
@@ -51,7 +51,7 @@ public struct DishesListItem: Codable, Equatable {
         updatedAt: String?,
         name: String?,
         description: String?,
-        price: String?,
+        price: Int?,
         isDeleted: Bool?,
         image: DishesListImage?,
         category: DishesListCategory?
@@ -169,3 +169,4 @@ public struct DishesListMeta: Codable, Equatable {
         self.orderField = orderField
     }
 }
+

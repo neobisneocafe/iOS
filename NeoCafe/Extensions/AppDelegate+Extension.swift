@@ -10,6 +10,6 @@ import UIKit
 
 extension UIViewController {
     var appDelegate: AppDelegate {
-        UIApplication.shared.delegate as! AppDelegate // доступ к appDelegate
+        UIApplication.shared.delegate as! AppDelegate 
     }
 }

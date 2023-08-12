@@ -22,11 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         window.makeKeyAndVisible()
         
+        DSGenerator.sharedInstance.setAccessToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiU2FyZGFyIiwicGhvbmVOdW1iZXIiOiI5OTY3MDQwMjI4MzIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY5MTY1NjEyMSwiZXhwIjoxNjkyMjYwOTIxfQ.N-VC8xJTrA5JPpgF8W2ltXGkW66fDwzpb5fm9P3B7vA")
+        
         // Проверка пользователя на авторизацию
         if (DSGenerator.sharedInstance.getAccessToken()) != nil {
-            mainApp() // пользователь существует
+            mainApp()
         } else {
-            launchApp() // пользователь не существует
+            launchApp() 
         }
      
         return true

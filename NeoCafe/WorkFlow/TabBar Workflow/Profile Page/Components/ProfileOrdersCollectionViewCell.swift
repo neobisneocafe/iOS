@@ -25,6 +25,8 @@ class ProfileOrdersCollectionViewCell: UICollectionViewCell {
         let view = UIImageView()
         view.image = UIImage(named: "actual")
         view.layer.cornerRadius = 24
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
@@ -64,7 +66,6 @@ class ProfileOrdersCollectionViewCell: UICollectionViewCell {
         dateLabel.text = props.date
     }
     
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         setUp()
@@ -88,6 +89,7 @@ class ProfileOrdersCollectionViewCell: UICollectionViewCell {
             $0.top.equalToSuperview().offset(computedHeight(8))
             $0.leading.equalToSuperview().offset(computedWidth(16))
             $0.bottom.equalToSuperview().offset(computedHeight(-8))
+            $0.width.equalTo(89)
         }
         branchLabel.snp.makeConstraints {
             $0.top.equalTo(branchImage).offset(computedHeight(20))
