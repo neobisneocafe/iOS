@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import netfox
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Готово"
+        
+        NFX.sharedInstance().start()
         
         let window  = UIWindow(frame: UIScreen.main.bounds)
         self.window = window

@@ -8,8 +8,6 @@
 //import UIKit
 //import SnapKit
 
-
-
 //class CategoryMenuVC: BaseViewController {
 //    private lazy var backButton: UIButton = {
 //        let button = UIButton()
@@ -116,7 +114,9 @@
 //    }
 //}
 //
-//// MARK: - UITableViewDelegate
+
+
+// MARK: - UITableViewDelegate
 //
 //extension CategoryMenuVC: UITableViewDelegate {
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

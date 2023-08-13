@@ -14,6 +14,7 @@
 //    )
 //}
 //
+
 //class HorizontalMenuCollectionView: UICollectionView {
 //    
 //    weak var delegateTap: HorizontalMenuCollectionViewDelegate?
@@ -44,7 +45,8 @@
 //    }
 //}
 //
-//// MARK: - UICollectionViewDataSource
+
+// MARK: - UICollectionViewDataSource
 //
 //extension HorizontalMenuCollectionView: UICollectionViewDataSource {
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -60,7 +62,8 @@
 //
 //
 //
-//// MARK: - UICollectionViewDelegate
+
+// MARK: - UICollectionViewDelegate
 //
 //extension HorizontalMenuCollectionView: UICollectionViewDelegate {
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -69,7 +72,8 @@
 //}
 //
 //
-//// MARK: - UICollectionViewFlowLayout
+
+// MARK: - UICollectionViewFlowLayout
 //
 //extension HorizontalMenuCollectionView: UICollectionViewDelegateFlowLayout {
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

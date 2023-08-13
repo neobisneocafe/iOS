@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LocationsViewModel {
+final class LocationsViewModel {
     var branches = BranchResponse()
     
     func fetchBranches(completion: @escaping (BranchResponse) -> Void) {

@@ -35,6 +35,10 @@
 		F64CF7712A86518200ACD0FA /* BranchApiSubServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64CF7702A86518200ACD0FA /* BranchApiSubServiceProtocol.swift */; };
 		F64CF7732A8651AF00ACD0FA /* BranchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64CF7722A8651AF00ACD0FA /* BranchResponse.swift */; };
 		F64CF77F2A8661B700ACD0FA /* CompletedOrderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64CF77E2A8661B700ACD0FA /* CompletedOrderVM.swift */; };
+		F64CF7832A879B7800ACD0FA /* IngredientsSubServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64CF7822A879B7800ACD0FA /* IngredientsSubServiceProtocol.swift */; };
+		F64CF7862A879CB300ACD0FA /* IngredientResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64CF7852A879CB300ACD0FA /* IngredientResponse.swift */; };
+		F64CF7972A87E20700ACD0FA /* DishDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64CF7962A87E20700ACD0FA /* DishDetailsVM.swift */; };
+		F64CF79A2A87EB3A00ACD0FA /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = F64CF7992A87EB3A00ACD0FA /* netfox */; };
 		F64DC60F2A5AC451005D67A9 /* CategoryMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64DC60E2A5AC451005D67A9 /* CategoryMenuTableViewCell.swift */; };
 		F653C4AE2A64F268009CEC76 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F653C4AD2A64F268009CEC76 /* BaseRouter.swift */; };
 		F653C4B02A64F2CF009CEC76 /* HttpMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = F653C4AF2A64F2CF009CEC76 /* HttpMethods.swift */; };
@@ -95,7 +99,7 @@
 		F6A21D232A3880DA00DBDB66 /* FittedSheets in Frameworks */ = {isa = PBXBuildFile; productRef = F6A21D222A3880DA00DBDB66 /* FittedSheets */; };
 		F6B0EC562A6EE239006F1564 /* UpdateRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B0EC552A6EE239006F1564 /* UpdateRefreshToken.swift */; };
 		F6B0EC592A6EEC6E006F1564 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = F6B0EC582A6EEC6E006F1564 /* SwiftDate */; };
-		F6B1B9F42A5F028500C20D2B /* DetailsDishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B9F32A5F028500C20D2B /* DetailsDishVC.swift */; };
+		F6B1B9F42A5F028500C20D2B /* DishViewControllerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B9F32A5F028500C20D2B /* DishViewControllerDetails.swift */; };
 		F6B1B9F62A5F212C00C20D2B /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B9F52A5F212C00C20D2B /* DishTableViewCell.swift */; };
 		F6B495B72A51ACB8007E37DA /* HistoryOfOrdersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B495B62A51ACB8007E37DA /* HistoryOfOrdersVC.swift */; };
 		F6B495B92A51C00B007E37DA /* HistoryOfOrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B495B82A51C00B007E37DA /* HistoryOfOrdersTableViewCell.swift */; };
@@ -147,6 +151,9 @@
 		F64CF7702A86518200ACD0FA /* BranchApiSubServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchApiSubServiceProtocol.swift; sourceTree = "<group>"; };
 		F64CF7722A8651AF00ACD0FA /* BranchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchResponse.swift; sourceTree = "<group>"; };
 		F64CF77E2A8661B700ACD0FA /* CompletedOrderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOrderVM.swift; sourceTree = "<group>"; };
+		F64CF7822A879B7800ACD0FA /* IngredientsSubServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsSubServiceProtocol.swift; sourceTree = "<group>"; };
+		F64CF7852A879CB300ACD0FA /* IngredientResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientResponse.swift; sourceTree = "<group>"; };
+		F64CF7962A87E20700ACD0FA /* DishDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailsVM.swift; sourceTree = "<group>"; };
 		F64DC60E2A5AC451005D67A9 /* CategoryMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMenuTableViewCell.swift; sourceTree = "<group>"; };
 		F653C4AD2A64F268009CEC76 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		F653C4AF2A64F2CF009CEC76 /* HttpMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethods.swift; sourceTree = "<group>"; };
@@ -205,7 +212,7 @@
 		F68F3FAC2A2EF6BD006E5C33 /* RegisterVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVerificationController.swift; sourceTree = "<group>"; };
 		F68F3FB22A2F13E5006E5C33 /* DateOfBirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthViewController.swift; sourceTree = "<group>"; };
 		F6B0EC552A6EE239006F1564 /* UpdateRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRefreshToken.swift; sourceTree = "<group>"; };
-		F6B1B9F32A5F028500C20D2B /* DetailsDishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDishVC.swift; sourceTree = "<group>"; };
+		F6B1B9F32A5F028500C20D2B /* DishViewControllerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishViewControllerDetails.swift; sourceTree = "<group>"; };
 		F6B1B9F52A5F212C00C20D2B /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
 		F6B495B62A51ACB8007E37DA /* HistoryOfOrdersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOfOrdersVC.swift; sourceTree = "<group>"; };
 		F6B495B82A51C00B007E37DA /* HistoryOfOrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOfOrdersTableViewCell.swift; sourceTree = "<group>"; };
@@ -246,6 +253,7 @@
 				F64A023C2A3335F600D03959 /* IQKeyboardManagerSwift in Frameworks */,
 				F62A113E2A78108A009860FC /* ReactiveMoya in Frameworks */,
 				F62A11402A78108A009860FC /* RxMoya in Frameworks */,
+				F64CF79A2A87EB3A00ACD0FA /* netfox in Frameworks */,
 				F62A113C2A78108A009860FC /* Moya in Frameworks */,
 				F62A11702A781E10009860FC /* SwiftBoost in Frameworks */,
 				F61E9D322A6AE23A009CE510 /* Kingfisher in Frameworks */,
@@ -295,6 +303,7 @@
 		F62A11452A781114009860FC /* SubServices */ = {
 			isa = PBXGroup;
 			children = (
+				F64CF7802A879B3700ACD0FA /* Ingredients */,
 				F64CF76D2A86502900ACD0FA /* Branch */,
 				F6C9B66E2A81E8B800E8B710 /* Basket */,
 				F6E32DA82A7ABDE90094FF53 /* QRCodes */,
@@ -539,6 +548,7 @@
 		F64CF76A2A864DA700ACD0FA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F64CF7962A87E20700ACD0FA /* DishDetailsVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -586,7 +596,7 @@
 		F64CF7742A86570600ACD0FA /* DetailsDishVC */ = {
 			isa = PBXGroup;
 			children = (
-				F6B1B9F32A5F028500C20D2B /* DetailsDishVC.swift */,
+				F6B1B9F32A5F028500C20D2B /* DishViewControllerDetails.swift */,
 			);
 			path = DetailsDishVC;
 			sourceTree = "<group>";
@@ -663,6 +673,31 @@
 				F6734E352A4E15C300934F74 /* OpenOrderVC.swift */,
 			);
 			path = OpenOrderVC;
+			sourceTree = "<group>";
+		};
+		F64CF7802A879B3700ACD0FA /* Ingredients */ = {
+			isa = PBXGroup;
+			children = (
+				F64CF7812A879B4200ACD0FA /* Entities */,
+				F64CF7842A879BD000ACD0FA /* Responses */,
+			);
+			path = Ingredients;
+			sourceTree = "<group>";
+		};
+		F64CF7812A879B4200ACD0FA /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F64CF7822A879B7800ACD0FA /* IngredientsSubServiceProtocol.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F64CF7842A879BD000ACD0FA /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				F64CF7852A879CB300ACD0FA /* IngredientResponse.swift */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 		F653C4AB2A64F1DC009CEC76 /* Services */ = {
@@ -1139,6 +1174,7 @@
 				F62A113D2A78108A009860FC /* ReactiveMoya */,
 				F62A113F2A78108A009860FC /* RxMoya */,
 				F62A116F2A781E10009860FC /* SwiftBoost */,
+				F64CF7992A87EB3A00ACD0FA /* netfox */,
 			);
 			productName = NeoCafe;
 			productReference = F68F3F682A2B4715006E5C33 /* NeoCafe.app */;
@@ -1177,6 +1213,7 @@
 				F6B0EC572A6EEC6E006F1564 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				F62A113A2A78108A009860FC /* XCRemoteSwiftPackageReference "Moya" */,
 				F62A116E2A781E10009860FC /* XCRemoteSwiftPackageReference "SwiftBoost" */,
+				F64CF7982A87EB3A00ACD0FA /* XCRemoteSwiftPackageReference "netfox" */,
 			);
 			productRefGroup = F68F3F692A2B4715006E5C33 /* Products */;
 			projectDirPath = "";
@@ -1215,12 +1252,13 @@
 				F62A116B2A781D84009860FC /* MenuView.swift in Sources */,
 				F6CF59ED2A3F09D000BAAE34 /* UIView+UICollectionViewCell.swift in Sources */,
 				F62A114A2A781146009860FC /* CategoryListResponse.swift in Sources */,
+				F64CF7832A879B7800ACD0FA /* IngredientsSubServiceProtocol.swift in Sources */,
 				F6BBD32B2A34BC7A0007E8FA /* TestHeaderView.swift in Sources */,
 				F6C9B67E2A82A96600E8B710 /* OpenOrderVM.swift in Sources */,
 				F6C9B6702A81E95700E8B710 /* BasketApiSubServiceProtocol.swift in Sources */,
 				F65937BD2A31F2070073C4DF /* BranchViewController.swift in Sources */,
 				F62A11552A781585009860FC /* DishesListResponse.swift in Sources */,
-				F6B1B9F42A5F028500C20D2B /* DetailsDishVC.swift in Sources */,
+				F6B1B9F42A5F028500C20D2B /* DishViewControllerDetails.swift in Sources */,
 				F68F3FA02A2D0F3D006E5C33 /* PhoneRegistrationViewController.swift in Sources */,
 				F62A115B2A781C01009860FC /* MenuAssembly.swift in Sources */,
 				F653C4B92A64F843009CEC76 /* StatusCode.swift in Sources */,
@@ -1251,6 +1289,7 @@
 				F68F3F972A2C4B43006E5C33 /* TextField.swift in Sources */,
 				F66131522A4BE5EE0075E982 /* ElementsView.swift in Sources */,
 				F61E9D2F2A6A1828009CE510 /* AccessTokenResponse.swift in Sources */,
+				F64CF7862A879CB300ACD0FA /* IngredientResponse.swift in Sources */,
 				F68F3F942A2C3C24006E5C33 /* NSObject.swift in Sources */,
 				F653C4E82A6942A8009CEC76 /* BranchDTO.swift in Sources */,
 				F68F3F852A2B4DF2006E5C33 /* StartViewController .swift in Sources */,
@@ -1289,6 +1328,7 @@
 				F64CF7732A8651AF00ACD0FA /* BranchResponse.swift in Sources */,
 				F6BBD3262A34AC5B0007E8FA /* UIView+Extension.swift in Sources */,
 				F6B495C12A5704A5007E37DA /* HorizontalMenuCollectionView.swift in Sources */,
+				F64CF7972A87E20700ACD0FA /* DishDetailsVM.swift in Sources */,
 				F66131582A4C67E70075E982 /* AddToCartTableViewCell.swift in Sources */,
 				F653C4C52A6542A0009CEC76 /* ApiService.swift in Sources */,
 				F6C9B6782A81EC7500E8B710 /* HistoryOfOrdersVM.swift in Sources */,
@@ -1550,6 +1590,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		F64CF7982A87EB3A00ACD0FA /* XCRemoteSwiftPackageReference "netfox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kasketis/netfox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		F653C4BD2A6501DD009CEC76 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1614,6 +1662,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F64A023A2A3335F600D03959 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		F64CF7992A87EB3A00ACD0FA /* netfox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F64CF7982A87EB3A00ACD0FA /* XCRemoteSwiftPackageReference "netfox" */;
+			productName = netfox;
 		};
 		F653C4BE2A6501DD009CEC76 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

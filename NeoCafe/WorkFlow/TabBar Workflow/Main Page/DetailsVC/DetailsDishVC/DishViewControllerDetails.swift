@@ -9,12 +9,12 @@ import UIKit
 import SwiftBoost
 import SnapKit
 
-protocol DetailsDishVCDelegate: AnyObject {
+protocol DishViewControllerDetailsDelegate: AnyObject {
     func dishTap()
 }
 
-class DetailsDishVC: BaseViewController {
-    weak var delegate: DetailsDishVCDelegate?
+class DishViewControllerDetails: BaseViewController {
+    weak var delegate: DishViewControllerDetailsDelegate?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -67,7 +67,8 @@ class DetailsDishVC: BaseViewController {
         tv.backgroundColor = UIColor(red: 0.254, green: 0.254, blue: 0.254, alpha: 1)
         tv.delegate = self
         tv.dataSource = self
-        tv.register(DishTableViewCell.self, forCellReuseIdentifier: DishTableViewCell.identifier)
+        tv.register(DishTableViewCell.self,
+                    forCellReuseIdentifier: DishTableViewCell.identifier)
         tv.rowHeight = UITableView.automaticDimension
         return tv
     }()
@@ -82,8 +83,8 @@ class DetailsDishVC: BaseViewController {
         containerView.addSubview(nameLabel)
         containerView.addSubview(descripsionLabel)
         containerView.addSubview(niceAdditionLabel)
-        view.addSubview(dishTableView)
-//        containerView.addSubview(dishTableView)
+//        view.addSubview(dishTableView)
+        containerView.addSubview(dishTableView)
     }
     
     override func setupConstrains() {
@@ -126,7 +127,7 @@ class DetailsDishVC: BaseViewController {
 
 // MARK: - UITableViewDataSource
 
-extension DetailsDishVC: UITableViewDataSource {
+extension DishViewControllerDetails: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -143,14 +144,14 @@ extension DetailsDishVC: UITableViewDataSource {
 
 // MARK: -  UITableViewDelegate
 
-extension DetailsDishVC:  UITableViewDelegate {
+extension DishViewControllerDetails:  UITableViewDelegate {
     
 }
 
 
 // MARK: - Selectors
 
-extension DetailsDishVC {
+extension DishViewControllerDetails {
     @objc private func backTap() {
         delegate?.dishTap()
         navigationController?.popViewController(animated: true)
