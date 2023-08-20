@@ -126,7 +126,7 @@ class ProfileEditViewController: BaseViewController {
          phoneTextField,
          birthTextField,
          saveButton]
-        .forEach {mainStackView.addArrangedSubview($0)}
+            .forEach {mainStackView.addArrangedSubview($0)}
     }
     
     override func setupConstrains() {
@@ -175,7 +175,7 @@ class ProfileEditViewController: BaseViewController {
 extension ProfileEditViewController {
     @objc func backTap() {
         navigationController?.popViewController(animated: true)
-       print("назад")
+        print("назад")
     }
     
     @objc func tapLogOut() {
@@ -192,16 +192,11 @@ extension ProfileEditViewController {
         if let datePicker = birthTextField.inputView as? UIDatePicker {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
-//            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-
-            //            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-            //            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
             birthTextField.text = dateFormatter.string(from: datePicker.date)
-            //            bDayDate = datePicker.date
         }
         birthTextField.resignFirstResponder()
     }
-    }
+}
 
 
 // MARK: - UITextFieldDelegate

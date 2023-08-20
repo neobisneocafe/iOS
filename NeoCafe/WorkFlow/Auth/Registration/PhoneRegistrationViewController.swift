@@ -168,6 +168,7 @@ extension PhoneRegistrationViewController {
     }
 }
 
+
 // MARK: - UITextFieldDelegate
 
 extension PhoneRegistrationViewController: UITextFieldDelegate {

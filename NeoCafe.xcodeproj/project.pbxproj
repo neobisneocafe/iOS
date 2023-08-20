@@ -107,6 +107,8 @@
 		F68F3FAA2A2EEC62006E5C33 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F3FA92A2EEC62006E5C33 /* BaseLabel.swift */; };
 		F68F3FAD2A2EF6BD006E5C33 /* RegisterVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F3FAC2A2EF6BD006E5C33 /* RegisterVerificationController.swift */; };
 		F68F3FB32A2F13E5006E5C33 /* DateOfBirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68F3FB22A2F13E5006E5C33 /* DateOfBirthViewController.swift */; };
+		F692844A2A926A7C00DBEFF1 /* BookQrRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69284492A926A7C00DBEFF1 /* BookQrRequest.swift */; };
+		F692844E2A926B1000DBEFF1 /* QRCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F692844D2A926B1000DBEFF1 /* QRCodeViewModel.swift */; };
 		F6A21D232A3880DA00DBDB66 /* FittedSheets in Frameworks */ = {isa = PBXBuildFile; productRef = F6A21D222A3880DA00DBDB66 /* FittedSheets */; };
 		F6B0EC562A6EE239006F1564 /* UpdateRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B0EC552A6EE239006F1564 /* UpdateRefreshToken.swift */; };
 		F6B0EC592A6EEC6E006F1564 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = F6B0EC582A6EEC6E006F1564 /* SwiftDate */; };
@@ -233,6 +235,8 @@
 		F68F3FA92A2EEC62006E5C33 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
 		F68F3FAC2A2EF6BD006E5C33 /* RegisterVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVerificationController.swift; sourceTree = "<group>"; };
 		F68F3FB22A2F13E5006E5C33 /* DateOfBirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthViewController.swift; sourceTree = "<group>"; };
+		F69284492A926A7C00DBEFF1 /* BookQrRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookQrRequest.swift; sourceTree = "<group>"; };
+		F692844D2A926B1000DBEFF1 /* QRCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewModel.swift; sourceTree = "<group>"; };
 		F6B0EC552A6EE239006F1564 /* UpdateRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRefreshToken.swift; sourceTree = "<group>"; };
 		F6B1B9F32A5F028500C20D2B /* DishViewControllerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishViewControllerDetails.swift; sourceTree = "<group>"; };
 		F6B1B9F52A5F212C00C20D2B /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
@@ -851,6 +855,7 @@
 			isa = PBXGroup;
 			children = (
 				F64CF7792A86584D00ACD0FA /* QRCodeVC */,
+				F692844C2A926AF100DBEFF1 /* ViewModel */,
 			);
 			path = "QRCode Page";
 			sourceTree = "<group>";
@@ -1072,6 +1077,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		F692844C2A926AF100DBEFF1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F692844D2A926B1000DBEFF1 /* QRCodeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F6BA9F7F2A7424760074463E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1182,6 +1195,7 @@
 			isa = PBXGroup;
 			children = (
 				F6E32DAB2A7AC1A30094FF53 /* QRCodesResponse.swift */,
+				F69284492A926A7C00DBEFF1 /* BookQrRequest.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1373,6 +1387,7 @@
 				F62A11672A781D42009860FC /* MenuCategoryCollectionViewCell.swift in Sources */,
 				F6C9B67A2A82A1B700E8B710 /* BasketOrdersResponse.swift in Sources */,
 				F65937AD2A31E9E40073C4DF /* TabBar.swift in Sources */,
+				F692844A2A926A7C00DBEFF1 /* BookQrRequest.swift in Sources */,
 				F62A11392A780EB3009860FC /* NewApiService.swift in Sources */,
 				F673E0192A8DDC510055EB72 /* DishDetailsVM.swift in Sources */,
 				F653C4B72A64F5A7009CEC76 /* ProResult.swift in Sources */,
@@ -1414,6 +1429,7 @@
 				F68F3F8F2A2B5BE7006E5C33 /* BaseVC.swift in Sources */,
 				F653C4E02A66FE9A009CEC76 /* UserDefaultsDataStoreProtocol.swift in Sources */,
 				F66131542A4BF7590075E982 /* AddToCartVC.swift in Sources */,
+				F692844E2A926B1000DBEFF1 /* QRCodeViewModel.swift in Sources */,
 				F62A116D2A781DA6009860FC /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

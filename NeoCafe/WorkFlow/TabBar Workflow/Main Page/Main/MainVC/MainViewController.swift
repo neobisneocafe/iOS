@@ -73,7 +73,6 @@ class MainViewController: BaseViewController {
         }
         
         viewModelDish.fetchAddons { [weak self] items in
-           
             self?.addonsItems = items
             self?.collectionView.reloadData()
             

@@ -51,11 +51,9 @@ class ProfileViewController: BaseViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = .init(width: view.frame.width, height: 105)
         layout.minimumLineSpacing = 10
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.register(BonusCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "BonusCollectionViewCell")
         collectionView.register(ProfileOrdersCollectionViewCell.self)
         collectionView.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")

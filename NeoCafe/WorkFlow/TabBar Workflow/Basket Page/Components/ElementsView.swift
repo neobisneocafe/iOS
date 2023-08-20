@@ -110,7 +110,6 @@ class ElementsView: UIView {
 
 extension ElementsView {
     @objc func backTap(){
-        
     }
     @objc func pushTap(){
     }

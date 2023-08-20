@@ -11,7 +11,6 @@ import SnapKit
 final class BaseLabel: UILabel {
     init() {
         super.init(frame: .zero)
-//        setupConstrains()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -23,11 +22,4 @@ final class BaseLabel: UILabel {
         self.font = .systemFont(ofSize: 14, weight: .regular)
         self.numberOfLines = 0
     }
-    
-//    func setupConstrains(){
-//        snp.makeConstraints{
-//            $0.height.equalTo(computedHeight(14))
-//        }
-//    }
 }
-

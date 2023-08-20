@@ -72,8 +72,6 @@ class AuthViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-   
-//    private var countryCode = "+996"
     
     override func setupViews() {
         super.setupViews()
@@ -142,20 +140,6 @@ extension AuthViewController {
         }
     }
 }
-    
-//    @objc func toGetTheCodeButtonTapped() {
-//
-//        guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else { return }
-//
-//        authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in
-//
-//            let vc = AuthVerificationController(authVerificationViewModel: AuthVerificationViewModel())
-//            DispatchQueue.main.async { [weak self] in
-//                self?.navigationController?.pushViewController(vc, animated: true)
-//            }
-//        }
-//    }
-    
 
 
 // MARK: - UITextFieldDelegate

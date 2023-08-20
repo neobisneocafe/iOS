@@ -11,10 +11,6 @@ import FittedSheets
 
 class AddToCartVC: BaseViewController {
     
-    private let tableOrderViewModel =  TableResponseVM()
-    private let branchId = -1
-    
-    
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "back"), for: .normal)
@@ -136,6 +132,11 @@ class AddToCartVC: BaseViewController {
         return button
     }()
     
+    // MARK: - Private Methods
+    
+    private let tableOrderViewModel =  TableResponseVM()
+    private let branchId = 1
+    
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = .white
@@ -232,7 +233,7 @@ extension AddToCartVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension AddToCartVC {
     @objc func backTap() {
@@ -240,7 +241,6 @@ extension AddToCartVC {
     }
     
     @objc func pushTap() {
-        
     }
     
     @objc func addTapHistory() {
@@ -249,11 +249,9 @@ extension AddToCartVC {
     }
     
     @objc func addMoreTapped() {
-        
     }
     
     @objc func takeAwayTapped() {
-       
     }
     
     @objc func inTheCafeTapped() {
@@ -265,7 +263,7 @@ extension AddToCartVC {
     }
     
     @objc func orderTapped() {
-        tableOrderViewModel.fetchTableOrders(requst: .init(uniqueCode: "NzQtnuTgYi67kA5N7jG1", dishId: [ 1, 2], bonusPoints: 0), branchId: branchId) { response in
+        tableOrderViewModel.fetchTableOrders(requst: .init(uniqueCode: "0kECNC5cbnTDKT3FQVDN", dishId: [ 1, 2], bonusPoints: 0), branchId: branchId) { response in
             debugPrint(response)
         }
     }

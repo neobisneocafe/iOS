@@ -33,57 +33,6 @@ extension String {
     }
 }
 
-//protocol ProfileEditViewControllerProtocol {
-//    func editProfileAlert(completion: @escaping (Bool) -> Void)
-//    func signOutProfileAlert(completion: @escaping (Bool) -> Void)
-//}
-//
-//extension ProfileEditViewController: ProfileEditViewControllerProtocol {
-//
-//    func editProfileAlert(completion: @escaping (Bool) -> Void) {
-//        let alert = UIAlertController(
-//            title: "Изменения не сохранены",
-//            message: "Хотите покинуть страницу редактирования?",
-//            preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Да", style: .default) { _ in
-//            completion(true)
-//        })
-//        alert.addAction(UIAlertAction(title: "Нет", style: .cancel) { _ in
-//            completion(false)
-//        })
-//        present(alert, animated: true)
-//    }
-//
-//    func signOutProfileAlert(completion: @escaping (Bool) -> Void) {
-//        let alert = UIAlertController(
-//            title: "Выход из учетной записи",
-//            message: "Вы уверены, что хотите выйти из своей учетной записи?",
-//            preferredStyle: .alert)
-//
-//        let cancelAction = UIAlertAction(
-//            title: "Отмена",
-//            style: .cancel) { _ in
-//                // Do nothing
-//                completion(false)
-//            }
-//
-//        let signOutAction = UIAlertAction(
-//            title: "Выйти",
-//            style: .destructive) { _ in
-//                // Sign out of the account
-//                DSGenerator.sharedInstance.removeAll()
-//                self.appDelegate.launchApp()
-//                completion(true)
-//            }
-//        alert.addAction(cancelAction)
-//        alert.addAction(signOutAction)
-//        present(alert, animated: true, completion: nil)
-//    }
-//}
-
-
-
-
 
 extension ProfileEditViewController {
     func editProfileAlert() {

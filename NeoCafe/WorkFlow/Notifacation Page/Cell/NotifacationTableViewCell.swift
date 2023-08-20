@@ -78,7 +78,7 @@ class NotifacationTableViewCell: UITableViewCell {
         [cappuccinoLabel,
          americanoLabel,
          latteLabel]
-        .forEach {mainStackView.addArrangedSubview($0)}
+            .forEach {mainStackView.addArrangedSubview($0)}
     }
     private func setupConstrains() {
         yourOrderIsReady.snp.makeConstraints { make in

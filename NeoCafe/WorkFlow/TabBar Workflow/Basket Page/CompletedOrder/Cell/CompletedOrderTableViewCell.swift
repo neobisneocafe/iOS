@@ -154,14 +154,11 @@ class CompletedOrderTableViewCell: UITableViewCell {
 
 extension CompletedOrderTableViewCell: HidableStepperDelegate {
     func stepperWillHideDecreaseButton() {
-        
     }
     
     func stepperWillRevealDecreaseButton() {
-        
     }
     
     func updateValue(with count: Int) {
-        
     }
 }

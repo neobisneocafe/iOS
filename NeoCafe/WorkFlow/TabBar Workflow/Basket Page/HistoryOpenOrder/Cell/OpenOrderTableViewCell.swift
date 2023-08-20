@@ -155,14 +155,11 @@ class OpenOrderTableViewCell: UITableViewCell {
 
 extension OpenOrderTableViewCell: HidableStepperDelegate {
     func stepperWillHideDecreaseButton() {
-        
     }
     
     func stepperWillRevealDecreaseButton() {
-        
     }
     
     func updateValue(with count: Int) {
-        
     }
 }

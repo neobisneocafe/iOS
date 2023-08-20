@@ -39,7 +39,6 @@ class RegisterVerificationController: BaseViewController {
     private lazy var mainTapLabel: UILabel = {
         let lb = UILabel()
         lb.textAlignment = .center
-//        lb.text = "отправленный на номер отправленный на номер телефона0552 321 123"
         lb.text = "отправленный на ваш номер телефона"
         lb.textColor = UIColor(red: 0.157, green: 0.224, blue: 0.322, alpha: 1)
         lb.font = .systemFont(ofSize: 18, weight: .regular)
@@ -136,7 +135,7 @@ class RegisterVerificationController: BaseViewController {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension RegisterVerificationController {
     @objc func tapBack() {

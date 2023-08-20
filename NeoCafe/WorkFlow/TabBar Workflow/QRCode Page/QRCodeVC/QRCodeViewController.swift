@@ -11,10 +11,6 @@ import AVFoundation
 
 class QRCodeViewController: BaseViewController {
     
-    let shadowColor = UIColor(named: "whiteQR")!
-        .withAlphaComponent(08)
-    
-    
     private lazy var titleLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Заказ через QR Code"
@@ -56,26 +52,34 @@ class QRCodeViewController: BaseViewController {
         return label
     }()
     
+    // MARK: -  Private Methods
+    
+    private let viewModel = QRCodeViewModel()
+    private let locationsViewModel = LocationsViewModel()
+    private let tableResponseViewModel = TableResponseVM()
+    private var currentQRCodTable: QRCodTableResponse?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async { [weak self] in
             self?.setupVideo()
             self?.createScanning()
+            self?.book()
         }
     }
     
     
     // MARK: - Характеристики
     
-    // 1 Настройка сессии
     private var video = AVCaptureVideoPreviewLayer()
     private var session = AVCaptureSession()
-    // 2 Настроиваем устройство видео
     private var captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
     
     
     override func setupViews() {
         super.setupViews()
+        view.backgroundColor = UIColor(red: 0.983, green: 0.983, blue: 0.983, alpha: 1)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(scanerView)
@@ -112,22 +116,17 @@ class QRCodeViewController: BaseViewController {
     
     
     private func setupVideo() {
-        // 3 Настройка inpuy
         do {
             let input = try AVCaptureDeviceInput(device: captureDevice!)
             session.addInput(input)
         } catch {
             fatalError(error.localizedDescription)
         }
-        // 4 Настроим output
+        
         let output = AVCaptureMetadataOutput()
         session.addOutput(output)
-        
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-        
-        // 5 video
-        
         video = AVCaptureVideoPreviewLayer(session: session)
         video.videoGravity = .resizeAspectFill
         qrCodeScanner.layer.addSublayer(video)
@@ -138,35 +137,20 @@ class QRCodeViewController: BaseViewController {
     }
     
     
-    //    private func startLaninig() {
-    //        view.layer.addSublayer(self.video)
-    //        DispatchQueue.main.async {
-    //            self.session.startRunning()
-    //        }
-    //    }
-    
-    func createScanning () {
+   private func createScanning () {
         let height: CGFloat = 14
         let opacity: Float = 0.6
-//        let topColor = .color.withAlphaComponent(0)
-//        let bottomColor = Asset.clientOrange.color
-        
         let layer = CAGradientLayer()
-//        layer.colors = [topColor.cgColor, bottomColor.cgColor]
         layer.opacity = opacity
-        
         let squareWidth = view.frame.width * 0.6
         layer.frame = CGRect(x: qrCodeScanner.bounds.origin.x - 20,
                              y: qrCodeScanner.bounds.origin.y,
                              width: qrCodeScanner.frame.width + 40,
                              height: 5)
-        
         self.qrCodeScanner.layer.insertSublayer(layer, at: 3)
-        
         let initialYPosition = layer.position.y
         let finalYPosition = initialYPosition + squareWidth - height - 10
         let duration: CFTimeInterval = 3
-        
         let animation = CABasicAnimation(keyPath: "position.y")
         animation.fromValue = initialYPosition as NSNumber
         animation.toValue = finalYPosition as NSNumber
@@ -174,6 +158,35 @@ class QRCodeViewController: BaseViewController {
         animation.repeatCount = .infinity
         animation.isRemovedOnCompletion = false
         layer.add(animation, forKey: nil)
+    }
+    
+    private func book() {
+        // TODO: поменять один филиал на несколько
+        locationsViewModel.fetchBranches { [weak self] branches in
+            guard
+                let branch = branches.first,
+                let id = branch.id,
+                let uniqueCode = self?.currentQRCodTable?.uniqueCode
+            else {
+                return
+            }
+            
+            // сделать заказ
+            let tableOrdersRequest = TableOrdersRequest(
+                uniqueCode: uniqueCode,
+                dishId: [1, 2],
+                bonusPoints: 0
+            )
+            self?.tableResponseViewModel.fetchTableOrders(requst: tableOrdersRequest, branchId: id) { orders in
+                print(orders)
+            }
+            
+            // бронь столика
+            let request = BookQrRequest(branchId: id, uniqueCode: uniqueCode)
+            self?.viewModel.book(request: request) { error in
+                print(error)
+            }
+        }
     }
 }
 
@@ -187,9 +200,10 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
                 
                 if object.type == AVMetadataObject.ObjectType.qr,
                    let nameText = object.stringValue {
-                    let alert = UIAlertController(title: "Заказ успешно оформлен", message: "\(nameText)", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Хорошо", style: .default) {
-                        [weak self] _ in
+                    let alert = UIAlertController(title: "Заказ успешно оформлен",
+                                                  message: "\(nameText)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо",
+                                                  style: .default) {  [weak self] _ in
                         self?.dismiss(animated: true)
                     })
                     present(alert, animated: true, completion: nil)

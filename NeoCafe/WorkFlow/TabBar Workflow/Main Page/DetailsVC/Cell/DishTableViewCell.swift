@@ -129,7 +129,5 @@ extension DishTableViewCell: HidableStepperDelegate {
     func stepperWillRevealDecreaseButton() { }
     
     func updateValue(with count: Int) {
-//        guard let dish = dish else { return }
-//        delegate?.updateItems(with: dish, count: count)
     }
 }

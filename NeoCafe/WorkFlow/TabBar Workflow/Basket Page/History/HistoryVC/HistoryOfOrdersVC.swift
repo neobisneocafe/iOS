@@ -172,27 +172,3 @@ extension HistoryOfOrdersVC {
         navigationController?.popViewController(animated: true)
     }
 }
-
-
-
-
-
-
-
-
-
-
-//private var completed : [HistoryOfOrdersTableViewCell.Props] {
-//    return items.filter({ $0.isCompleted })
-//
-//}
-//
-
-//    var completed =  [HistoryOfOrdersTableViewCell.Props]()
-//    var notCompleted =  [HistoryOfOrdersTableViewCell.Props]()
-    
-//    func refreshTable() {
-//        completed = items.filter({ $0.isCompleted })
-//        notCompleted = items.filter({!$0.isCompleted })
-//        mainTableView.reloadData()
-//    }

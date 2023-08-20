@@ -39,7 +39,6 @@ class AuthVerificationController: BaseViewController {
         let lb = UILabel()
         lb.textAlignment = .center
         lb.text = "отправленный на ваш номер телефона"
-//        lb.text = "отправленный на номер 0552 321 123"
         lb.textColor = UIColor(red: 0.157, green: 0.224, blue: 0.322, alpha: 1)
         lb.font = .systemFont(ofSize: 18, weight: .regular)
         lb.numberOfLines = 0
@@ -151,8 +150,6 @@ extension AuthVerificationController {
         if !codeText.isEmpty  {
             
             authVerificationViewModel.authVerification(verificationCode: codeText) { verificationCode in
-//                DataStoreUserDefaults.shared.setAccessToken(verificationCode.accessToken)
-//                DataStoreUserDefaults.shared.setRefreshToken(verificationCode.refreshToken)
                 let vc = MainTabBarController()
                 DispatchQueue.main.async { [weak self] in
                     self?.navigationController?.pushViewController(vc, animated: true)
