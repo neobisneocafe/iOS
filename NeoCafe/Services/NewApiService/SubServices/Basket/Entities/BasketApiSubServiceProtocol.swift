@@ -12,7 +12,7 @@ import Moya
 protocol BasketApiSubServiceProtocol {
     func fetchHistory() async throws -> BasketHistoryResponse
     func fetchOrders(_ id: Int) async throws -> BasketOrdersResponseElement
-//    func fetchWriteOffOf(_ id: Int, _ id: Int ) ->
+    func fetchTableOrders(_ request: TableOrdersRequest, branchId: Int ) async throws -> TableOrdersResponse
 }
 
 // MARK: - Service
@@ -25,6 +25,10 @@ extension NewApiService: BasketApiSubServiceProtocol {
     func fetchOrders(_ id: Int) async throws -> BasketOrdersResponseElement {
         return try await requestDecodable(BasketTarget.fetchOrders(id))
     }
+    
+    func fetchTableOrders(_ request: TableOrdersRequest, branchId: Int)  async throws -> TableOrdersResponse {
+        return try await requestDecodable(BasketTarget.fetchTableOrders(request, branchId: branchId))
+    }
 }
 
 // MARK: - Target
@@ -32,7 +36,7 @@ extension NewApiService: BasketApiSubServiceProtocol {
 enum BasketTarget: CustomType {
     case fetchHistory
     case fetchOrders(_ id: Int)
-
+    case fetchTableOrders(_ request: TableOrdersRequest, branchId: Int)
     // MARK: - Props
 
     var path: String {
@@ -41,6 +45,8 @@ enum BasketTarget: CustomType {
             return "/basket"
         case .fetchOrders(let id):
             return "/basket/\(id)"
+        case .fetchTableOrders(_, let branchId):
+            return "/api/basket/\(branchId)/order"
         }
     }
 
@@ -50,6 +56,8 @@ enum BasketTarget: CustomType {
             return .get
         case .fetchOrders:
             return .get
+        case .fetchTableOrders:
+            return .post
         }
     }
 
@@ -59,6 +67,8 @@ enum BasketTarget: CustomType {
             return .requestPlain
         case .fetchOrders:
             return .requestPlain
+        case .fetchTableOrders(let request, branchId: _ ):
+            return .requestJSONEncodable(request)
         }
     }
 

@@ -170,7 +170,7 @@ class ProfileEditViewController: BaseViewController {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension ProfileEditViewController {
     @objc func backTap() {
@@ -180,7 +180,7 @@ extension ProfileEditViewController {
     
     @objc func tapLogOut() {
         signOutProfileAlert()
-        print("Выход из Системы Приложение)))")
+        print("Выход из Системы Приложение")
     }
     
     @objc func saveTap() {

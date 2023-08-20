@@ -8,6 +8,9 @@
 import Combine
 import Foundation
 
+import Combine
+import Foundation
+
 final class MenuViewModel {
     // MARK: - Internal Props
 
@@ -19,6 +22,7 @@ final class MenuViewModel {
     private let categoryApiService: CategoryApiSubServiceProtocol = NewApiService.shared
     private let dishesApiService: DishesApiSubServiceProtocol = NewApiService.shared
 
+    private var currentCategory: CategoryListItem?
     private var category: [CategoryListItem] = []
     private var dishes: [DishesListItem] = []
     private let dataSubject = PassthroughSubject<(category: (data: [CategoryListItem], selectedId: Int), dishes: [DishesListItem]), Error>()
@@ -61,8 +65,16 @@ extension MenuViewModel {
             .store(in: &store)
 
         input.tapOnDishes
-            .sink { index in
-                debugPrint(index)
+            .sink { [weak self] index in
+                guard
+                    let self,
+                    let currentCategory,
+                    let dishId = dishes.filter({ $0.category?.id == currentCategory.id })[safe: index]?.id
+                else {
+                    return
+                }
+
+                router.routeTo(.detail(dishId))
             }
             .store(in: &store)
 
@@ -96,5 +108,7 @@ private extension MenuViewModel {
         let dishes = dishes.filter { $0.category?.id == currentCategory.id }
 
         dataSubject.send(((category, currentCategory.id ?? -1), dishes))
+
+        self.currentCategory = currentCategory
     }
 }

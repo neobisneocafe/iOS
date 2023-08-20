@@ -8,7 +8,8 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-     override func viewDidLoad() {
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstrains()

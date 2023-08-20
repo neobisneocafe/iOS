@@ -5,9 +5,11 @@
 //  Created by Adinay on 12/7/23.
 //
 
-import UIKit
-import SwiftBoost
+
+import Kingfisher
 import SnapKit
+import SwiftBoost
+import UIKit
 
 protocol DishViewControllerDetailsDelegate: AnyObject {
     func dishTap()
@@ -15,6 +17,12 @@ protocol DishViewControllerDetailsDelegate: AnyObject {
 
 class DishViewControllerDetails: BaseViewController {
     weak var delegate: DishViewControllerDetailsDelegate?
+
+    private let id: Int
+
+    private let viewModel = DishDetailsVM()
+
+    private var addonsItems: [AddonDishesResponseElement] = []
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -29,7 +37,8 @@ class DishViewControllerDetails: BaseViewController {
     
     private lazy var dishImage: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
         iv.image = UIImage(named: "dish")
         return iv
     }()
@@ -72,7 +81,44 @@ class DishViewControllerDetails: BaseViewController {
         tv.rowHeight = UITableView.automaticDimension
         return tv
     }()
-    
+
+    init(id: Int) {
+        self.id = id
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        viewModel.fetchDish(id: id) { [weak self] item in
+            guard let self else { return }
+
+            nameLabel.text = item.name
+            descripsionLabel.text = item.description
+            dishImage.kf.setImage(with: URL(string: item.image?.url ?? ""))
+        }
+
+        viewModel.fetchAddons { [weak self] items in
+            self?.addonsItems = items
+            self?.dishTableView.reloadData()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+
     override func setupViews() {
         super.setupViews()
         view.backgroundColor = UIColor(red: 0.254, green: 0.254, blue: 0.254, alpha: 1)
@@ -89,7 +135,7 @@ class DishViewControllerDetails: BaseViewController {
     
     override func setupConstrains() {
         super.setupConstrains()
-        scrollView.snp.makeConstraints { 
+        scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         containerView.snp.makeConstraints {
@@ -97,8 +143,10 @@ class DishViewControllerDetails: BaseViewController {
             $0.height.equalTo(1600)
         }
         dishImage.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(4))
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(computedWidth(0))
+
+            $0.height.equalTo(225)
         }
         backButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(computedHeight(16))
@@ -128,12 +176,19 @@ class DishViewControllerDetails: BaseViewController {
 // MARK: - UITableViewDataSource
 
 extension DishViewControllerDetails: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        print(addonsItems.count)
+        return addonsItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DishTableViewCell.identifier, for: indexPath) as! DishTableViewCell
+        let item = addonsItems[indexPath.row]
+        cell.render(.init(imageUrl: "", name: item.name ?? "n/n", description: item.description ?? "n/n", price: String(item.price ?? -1)))
         return cell
     }
     

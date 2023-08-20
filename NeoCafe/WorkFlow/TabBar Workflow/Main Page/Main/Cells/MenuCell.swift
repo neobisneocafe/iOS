@@ -10,7 +10,7 @@ import SnapKit
 import SwiftBoost
 import UIKit
 
-class TestCell: UICollectionViewCell {
+class MenuCell: UICollectionViewCell {
     // MARK: - Views
 
     private lazy var imageView = UIImageView().do {

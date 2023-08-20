@@ -1,30 +1,20 @@
 //
-//  DishTableViewCell.swift
+//  PopularCell.swift
 //  NeoCafe
 //
-//  Created by Adinay on 12/7/23.
+//  Created by Adinay on 18/8/23.
 //
 
 import UIKit
 import SnapKit
-import Kingfisher
 
-protocol DishTableViewCellDelegate: AnyObject {
+protocol PopularCellDelegate: AnyObject {
     func updateItems(count: Int)
 }
 
-class DishTableViewCell: UITableViewCell {
+class PopularCell: UICollectionViewCell {
     
-    struct Props {
-        let imageUrl: String?
-        let name: String
-        let description: String
-        let price: String
-    }
-    
-    static let identifier = "DishTableViewCell"
-    
-    weak var delegate: DishTableViewCellDelegate?
+    weak var delegate: PopularCellDelegate?
     
     public lazy var nameImage: UIImageView = {
         let iv = UIImageView()
@@ -35,19 +25,27 @@ class DishTableViewCell: UITableViewCell {
         iv.backgroundColor = .clear
         return iv
     }()
+    
+    private lazy var titleLabel: UILabel = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 20)
+        view.text = "Some Text"
+        return view
+    }()
+    
     public lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.text = "Капучино"
+        label.textColor = UIColor(red: 0.157, green: 0.224, blue: 0.322, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.textColor = UIColor(named: "F8F8F8")
         return label
     }()
     public lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = UIColor(named: "gray-2")
+        label.textColor = UIColor(red: 0.357, green: 0.357, blue: 0.439, alpha: 1)
         label.text = "Кофейный напиток"
         return label
     }()
@@ -67,29 +65,44 @@ class DishTableViewCell: UITableViewCell {
         stepper.delegate = self
         return stepper
     }()
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUp()
+    
+    func display(_ title: String) {
+        titleLabel.text = title
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    private func setUp() {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupViews()
         setupConstrains()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup(item: AddonDishesResponseElement) {
+        guard let name = item.name,
+              let description = item.description,
+              let price = item.price?.description
+        else { return }
+        
+        nameLabel.text = name
+        descriptionLabel.text = description
+        priceLabel.text = price
+    }
+    
     private func setupViews() {
-        contentView.backgroundColor = UIColor(red: 0.254, green: 0.254, blue: 0.254, alpha: 1)
         contentView.addSubview(nameImage)
         contentView.addSubview(stepperControl)
         contentView.addSubview(nameLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(priceLabel)
     }
+    
     private func setupConstrains() {
         nameImage.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(computedHeight(0))
-            make.leading.equalToSuperview().inset(computedWidth(16))
+            make.leading.equalToSuperview().inset(computedWidth(4))
             make.height.equalTo(computedHeight(88))
         }
         nameLabel.snp.makeConstraints { make in
@@ -111,20 +124,12 @@ class DishTableViewCell: UITableViewCell {
             $0.width.equalTo(computedWidth(94))
         }
     }
-    
-    func render(_ props: Props) {
-        if let image = props.imageUrl {
-            nameImage.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "coffee"))
-        }
-        nameImage.kf.setImage(with: URL(string: props.imageUrl ?? ""))
-        nameLabel.text = props.name
-    }
 }
 
 
 // MARK: - HidableStepperDelegate
 
-extension DishTableViewCell: HidableStepperDelegate {
+extension PopularCell: HidableStepperDelegate {
     func stepperWillHideDecreaseButton() { }
     func stepperWillRevealDecreaseButton() { }
     

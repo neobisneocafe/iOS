@@ -104,7 +104,7 @@ final class MainTabBarController: UITabBarController {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension MainTabBarController {
     @objc private func qrButtonAction(sender: UIButton) {

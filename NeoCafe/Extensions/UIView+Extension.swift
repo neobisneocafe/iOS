@@ -24,5 +24,9 @@ extension UIView {
         }
         layer.rasterizationScale = true ? UIScreen.main.scale : 1
     }
+    
+    func addCornerRadius(_ radius: CGFloat) {
+            layer.cornerRadius = radius
+            layer.masksToBounds = true
+    }
 }
-

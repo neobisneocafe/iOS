@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+
 class MainViewController: BaseViewController {
     
     enum Section {
@@ -43,7 +44,8 @@ class MainViewController: BaseViewController {
         
         view.dataSource = self
         view.delegate = self
-        view.register(TestCell.self, forCellWithReuseIdentifier: "TestCell")
+        view.register(MenuCell.self, forCellWithReuseIdentifier: "TestCell")
+        view.register(PopularCell.self, forCellWithReuseIdentifier: "PopularCell")
         view.register(TestHeaderView.self,
                       forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                       withReuseIdentifier: "TestHeaderView")
@@ -55,6 +57,10 @@ class MainViewController: BaseViewController {
     private let viewModel = CategoryDishesViewModel()
 
     private var categoryItems: [CategoryListItem] = []
+    
+    private let viewModelDish = DishDetailsVM()
+    
+    private var addonsItems: [AddonDishesResponseElement] = []
 
     // MARK: - LifeCycle
 
@@ -63,6 +69,14 @@ class MainViewController: BaseViewController {
         viewModel.fetchCategory { [weak self] items in
             self?.categoryItems = items
             self?.collectionView.reloadData()
+
+        }
+        
+        viewModelDish.fetchAddons { [weak self] items in
+           
+            self?.addonsItems = items
+            self?.collectionView.reloadData()
+            
         }
     }
     
@@ -116,11 +130,15 @@ extension MainViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath)
             return cell
         } else if section == .menu {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath) as? TestCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath) as? MenuCell else { return UICollectionViewCell() }
             cell.configure(imageUrl: categoryItems[safe: indexPath.row]?.imageUrl ?? nil)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath)
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCell", for: indexPath) as? PopularCell else { return UICollectionViewCell() }
+            print(addonsItems)
+//            let item = addonsItems[indexPath.row]
+//            cell.setup(item: item)
+            
             return cell
         }
     }

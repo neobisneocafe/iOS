@@ -104,20 +104,6 @@ private extension MenuDishesCollectionViewCell {
     }
 }
 
-
-//extension MenuDishesCollectionViewCell: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        navigationController?.pushViewController(MenuAssembly.create(), animated: true)
-//    }
-//}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-//extension MainViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        navigationController?.pushViewController(MenuAssembly.create(), animated: true)
-//    }
-    //}
 // MARK: - Constants
 
 private extension MenuDishesCollectionViewCell {

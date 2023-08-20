@@ -164,5 +164,5 @@ extension AuthVerificationController {
     @objc func tapSendAgain() {
         
     }
-   
+   //Mappable, R.swift, RX == Combine, MVVM+C Coordinator, MVVVM, MVC
 }

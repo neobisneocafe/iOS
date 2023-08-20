@@ -19,6 +19,10 @@ class CompletedOrderVC: BaseViewController {
     
     private let id: Int
     
+    private var bonuses: Int = 0
+    
+    private let viewModelBonuses = BonusOrderVM()
+    
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "back"), for: .normal)
@@ -132,6 +136,10 @@ class CompletedOrderVC: BaseViewController {
             orderLabel.text = "Заказ №\(String(response.id ?? -1))"
             numberLabel.text = "\(response.branch?.name ?? "n/n"), \(branch.createdAt?.toDate()?.toFormat("d MMMM", locale: Locales.russian) ?? "n/n")"
         }
+        
+        viewModelBonuses.fetchBonuses { value in
+            self.bonuses = value.bonusPoints ?? 0
+        }
     }
     
     override func setupViews() {
@@ -216,6 +224,7 @@ extension CompletedOrderVC: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+
 // MARK: - Selectors
 
 extension CompletedOrderVC {
@@ -236,6 +245,7 @@ extension CompletedOrderVC {
         
         let yesAction = UIAlertAction(title: "Да", style: .default) { (_) in
             self.showBonusAlert()
+            
         }
         let noAction = UIAlertAction(title: "Нет", style: .cancel,
                                      handler: nil)
@@ -263,5 +273,6 @@ extension CompletedOrderVC {
     private func configurationTextField(textField: UITextField) {
         self.bonusTextField = textField
         textField.keyboardType = .numberPad
+        textField.text = "\(self.bonuses)"
     }
 }

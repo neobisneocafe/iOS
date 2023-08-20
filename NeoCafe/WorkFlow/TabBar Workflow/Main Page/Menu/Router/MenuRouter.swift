@@ -9,14 +9,16 @@ import UIKit
 
 final class MenuRouter {
     enum RouterType {
+        case detail(Int)
     }
 
     weak var viewController: UIViewController?
 
     func routeTo(_ type: RouterType) {
-//        switch type {
-//        default:
-//            break
-//        }
+        switch type {
+        case .detail(let id):
+            let vc = DishViewControllerDetails(id: id)
+            viewController?.navigationController?.pushViewController(vc)
+        }
     }
 }

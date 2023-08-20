@@ -38,7 +38,7 @@ class ProfileViewController: BaseViewController {
         return iv
     }()
     
-    private let nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         label.textAlignment = .left
@@ -49,20 +49,19 @@ class ProfileViewController: BaseViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width, height: 105)
+        layout.itemSize = .init(width: view.frame.width, height: 105)
         layout.minimumLineSpacing = 10
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.delegate = self
-        view.dataSource = self
-        view.registerReusableView(ViewType: BonusCollectionViewCell.self,
-                                  type: .UICollectionElementKindSectionHeader)
         
-        view.registerCollectionReusable(CellType: ProfileOrdersCollectionViewCell.self)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
-        view.registerReusableView(ViewType: Header.self,
-                                  type: .UICollectionElementKindSectionHeader)
-        view.backgroundColor = .white
-        return view
+        collectionView.register(BonusCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "BonusCollectionViewCell")
+        collectionView.register(ProfileOrdersCollectionViewCell.self)
+        collectionView.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")
+        
+        collectionView.backgroundColor = .white
+        return collectionView
     }()
     
     // MARK: - Private Props
@@ -201,13 +200,13 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
 
 extension ProfileViewController {
     @objc func backTap() {
-        print("backTap")
+        print("")
     }
     
     @objc func tapEdit() {
         let vc = ProfileEditViewController()
         navigationController?.pushViewController(vc, animated: true)
-        print("edit")
+        print("")
     }
 }
 

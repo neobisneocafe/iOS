@@ -26,7 +26,7 @@ final class OneTimeCodeTextField: UITextField {
     
     // MARK: - Количество Текстовых Полей
     
-    func configure(with slotCount: Int = 4) {
+   func configure(with slotCount: Int = 4) {
         guard isConfigured == false else { return }
         isConfigured.toggle()
         configureTextField()

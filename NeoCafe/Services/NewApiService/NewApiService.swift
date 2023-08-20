@@ -27,7 +27,7 @@ struct NewApiService {
                 do {
                     switch result {
                     case .success(let response):
-                        continuation.resume(returning: try response.map(D.self))
+                        continuation.resume(returning: try response.filterSuccessfulStatusAndRedirectCodes().map(D.self))
 
                     case .failure(let error):
                         continuation.resume(throwing: error)

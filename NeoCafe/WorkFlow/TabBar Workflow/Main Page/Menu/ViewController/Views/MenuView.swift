@@ -174,6 +174,7 @@ extension MenuView: UICollectionViewDelegate {
 
         case .dishes:
             tapOnDishes.send(indexPath.row)
+            
         }
     }
 }

@@ -16,12 +16,7 @@ protocol QRCodesApiSubServiceProtocol {
 
 // MARK: - Service
 
-//
-//extension NewApiService: QRCodesApiSubServiceProtocol {
-//    func tableId(_ request: QRCodTableResponse) async throws -> QRCodTableResponse {
-//        try await requestDecodable(QRCodTableResponse.tableId(request))
-//    }
-//}
+
 
 // MARK: - Target
 
