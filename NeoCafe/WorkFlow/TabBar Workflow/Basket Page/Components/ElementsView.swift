@@ -14,7 +14,7 @@ protocol ElementsViewDelegate: AnyObject {
     func addTapHistory()
 }
 
-class ElementsView: UIView {
+final class ElementsView: UIView {
 
     private lazy var backButton: UIButton = {
         let button = UIButton()

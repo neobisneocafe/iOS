@@ -12,7 +12,7 @@ protocol PopularCellDelegate: AnyObject {
     func updateItems(count: Int)
 }
 
-class PopularCell: UICollectionViewCell {
+final class PopularCell: UICollectionViewCell {
     
     weak var delegate: PopularCellDelegate?
     

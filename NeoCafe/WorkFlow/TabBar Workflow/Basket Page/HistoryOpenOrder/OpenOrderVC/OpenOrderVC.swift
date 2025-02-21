@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import SwiftDate
 
-class OpenOrderVC: BaseViewController {
+final class OpenOrderVC: BaseViewController {
     
     // MARK: - Private Props
     

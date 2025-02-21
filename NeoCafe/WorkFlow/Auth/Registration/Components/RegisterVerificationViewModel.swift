@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RegisterVerificationViewModel {
+final class RegisterVerificationViewModel {
     func registerVerification(phoneNumber: String, codeToConfirm: String, completion: @escaping (String) -> Void) {
         NetworkManager().performRequest(
             urlRequest: ApiService.postActiveToken(phoneNumber: phoneNumber,codeToConfirm: codeToConfirm).makeUrlRequest(),

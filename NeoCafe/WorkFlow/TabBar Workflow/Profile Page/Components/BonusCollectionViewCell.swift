@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BonusCollectionViewCell: UICollectionReusableView {
+final class BonusCollectionViewCell: UICollectionReusableView {
     
     private lazy var bonusesImage: UIImageView = {
         let iv = UIImageView()

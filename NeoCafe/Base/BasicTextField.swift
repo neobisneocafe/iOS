@@ -38,18 +38,31 @@ final class BasicTextField: UITextField {
         layer.shadowColor = UIColor(red: 1, green: 0.649, blue: 0.5, alpha: 1).cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
     }
-    
     func setupConstrains(){
         snp.makeConstraints{
             $0.height.equalTo(computedHeight(56))
         }
     }
-    
 }
 
 extension BasicTextField: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+
+extension UITextField {
+    func setLeftPaddingPoints(_ amount:CGFloat){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    
+    func setRightPaddingPoints(_ amount:CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
     }
 }

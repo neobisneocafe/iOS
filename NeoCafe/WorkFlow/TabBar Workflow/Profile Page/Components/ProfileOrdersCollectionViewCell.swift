@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class ProfileOrdersCollectionViewCell: UICollectionViewCell {
+final class ProfileOrdersCollectionViewCell: UICollectionViewCell {
     
     struct Props {
         let isCompleted: Bool
@@ -155,4 +155,3 @@ extension ProfileViewController {
         }
     }
 }
-

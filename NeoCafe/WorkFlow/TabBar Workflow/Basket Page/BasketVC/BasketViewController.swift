@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BasketViewController: BaseViewController {
+final class BasketViewController: BaseViewController {
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
@@ -139,7 +139,7 @@ class BasketViewController: BaseViewController {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension BasketViewController {
     @objc func backTap() {

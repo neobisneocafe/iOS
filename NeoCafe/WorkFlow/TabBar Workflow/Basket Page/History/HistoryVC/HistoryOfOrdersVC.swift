@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import SwiftDate
 
-class HistoryOfOrdersVC: BaseViewController {
+final class HistoryOfOrdersVC: BaseViewController {
     
     enum SectionType: String, CaseIterable {
         case openOrder = "Открытый заказ"
@@ -165,7 +165,7 @@ func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension HistoryOfOrdersVC {
     @objc func backTap() {

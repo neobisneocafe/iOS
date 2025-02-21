@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BranchViewController: BaseViewController {
+final class BranchViewController: BaseViewController {
     
     var branch = [BranchDTO]()
     
@@ -160,7 +160,6 @@ extension BranchViewController: LocationsCellDelegate {
     func didTapPhoneNumBerButton() {
         
     }
-    
 }
 
 

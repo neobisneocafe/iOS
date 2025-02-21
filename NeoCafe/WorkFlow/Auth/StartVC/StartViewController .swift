@@ -58,7 +58,7 @@ final class StartViewController: BaseViewController {
     }
 }
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension StartViewController {
     @objc func toComeInButtonTapped() {

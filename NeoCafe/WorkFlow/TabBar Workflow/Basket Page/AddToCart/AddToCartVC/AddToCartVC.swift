@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import FittedSheets
 
-class AddToCartVC: BaseViewController {
+final class AddToCartVC: BaseViewController {
     
     private lazy var backButton: UIButton = {
         let button = UIButton()

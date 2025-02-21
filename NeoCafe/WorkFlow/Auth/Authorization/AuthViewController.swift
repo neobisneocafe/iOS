@@ -86,7 +86,6 @@ class AuthViewController: BaseViewController {
         [phoneNumberTextField,
          toGetTheCodeButton]
         .forEach {mainStackView.addArrangedSubview($0)}
-       
     }
     
     override func setupConstrains() {
@@ -118,7 +117,7 @@ class AuthViewController: BaseViewController {
 }
 
 
-// MARK: - Selector
+// MARK: - Selectors
 
 extension AuthViewController {
     @objc func backTap() {
@@ -127,9 +126,7 @@ extension AuthViewController {
         }
     }
     
-    
     @objc func toGetTheCodeButtonTapped() {
-        
         guard let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else { return }
         
         authViewModel.authUser(phoneNumber: phoneNumber) { [weak self] in

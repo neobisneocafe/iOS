@@ -26,25 +26,25 @@ final class LaunchScreenViewController: BaseViewController {
         }
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
-//            self.animate()
-//        })
-//    }
+    //    override func viewDidLayoutSubviews() {
+    //        super.viewDidLayoutSubviews()
+    //        DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
+    //            self.animate()
+    //        })
+    //    }
     
-//    private func animate() {
-//        UIView.animate(withDuration: 56, animations: {
-//            let size = self.view.frame.size.width * 33
-//            let diffX = size - self.view.frame.size.width
-//            let diffY = self.view.frame.size.height - size
-//            self.mainImage.frame = CGRect(x: -(diffX/2),
-//                                          y: diffY/2,
-//                                          width: size,
-//                                          height: size)
-//        })
-           
-//    }
+    //    private func animate() {
+    //        UIView.animate(withDuration: 56, animations: {
+    //            let size = self.view.frame.size.width * 33
+    //            let diffX = size - self.view.frame.size.width
+    //            let diffY = self.view.frame.size.height - size
+    //            self.mainImage.frame = CGRect(x: -(diffX/2),
+    //                                          y: diffY/2,
+    //                                          width: size,
+    //                                          height: size)
+    //        })
+    
+    //    }
     
     override func setupConstrains() {
         super.setupConstrains()

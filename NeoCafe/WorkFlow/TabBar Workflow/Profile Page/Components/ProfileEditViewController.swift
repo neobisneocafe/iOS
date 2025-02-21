@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileEditViewController: BaseViewController {
+final class ProfileEditViewController: BaseViewController {
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "back"), for: .normal)

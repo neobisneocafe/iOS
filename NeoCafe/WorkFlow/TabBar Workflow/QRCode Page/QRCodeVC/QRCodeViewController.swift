@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-class QRCodeViewController: BaseViewController {
+final class QRCodeViewController: BaseViewController {
     
     private lazy var titleLabel: UILabel = {
         let lb = UILabel()
@@ -58,7 +58,6 @@ class QRCodeViewController: BaseViewController {
     private let locationsViewModel = LocationsViewModel()
     private let tableResponseViewModel = TableResponseVM()
     private var currentQRCodTable: QRCodTableResponse?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,6 +160,7 @@ class QRCodeViewController: BaseViewController {
     }
     
     private func book() {
+        
         // TODO: поменять один филиал на несколько
         locationsViewModel.fetchBranches { [weak self] branches in
             guard
@@ -171,7 +171,8 @@ class QRCodeViewController: BaseViewController {
                 return
             }
             
-            // сделать заказ
+            //  MARK: - сделать заказ
+            
             let tableOrdersRequest = TableOrdersRequest(
                 uniqueCode: uniqueCode,
                 dishId: [1, 2],
@@ -181,7 +182,8 @@ class QRCodeViewController: BaseViewController {
                 print(orders)
             }
             
-            // бронь столика
+            //  MARK: - бронь столика
+        
             let request = BookQrRequest(branchId: id, uniqueCode: uniqueCode)
             self?.viewModel.book(request: request) { error in
                 print(error)

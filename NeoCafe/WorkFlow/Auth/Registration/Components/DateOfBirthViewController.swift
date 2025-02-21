@@ -137,7 +137,6 @@ extension DateOfBirthViewController {
         DispatchQueue.main.async { [weak self] in
             let vc = MainTabBarController()
             self?.navigationController?.pushViewController(vc, animated: true)
-            print("asd")
         }
     }
     

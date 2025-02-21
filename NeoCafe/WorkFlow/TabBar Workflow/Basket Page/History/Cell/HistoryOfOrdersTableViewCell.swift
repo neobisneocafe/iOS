@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class HistoryOfOrdersTableViewCell: UITableViewCell {
+final class HistoryOfOrdersTableViewCell: UITableViewCell {
     
     struct Props {
         let id: Int

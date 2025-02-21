@@ -8,9 +8,6 @@
 import Combine
 import Foundation
 
-import Combine
-import Foundation
-
 final class MenuViewModel {
     // MARK: - Internal Props
 

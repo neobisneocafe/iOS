@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import SwiftDate
 
-class ProfileViewController: BaseViewController {
+final class ProfileViewController: BaseViewController {
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "back"), for: .normal)

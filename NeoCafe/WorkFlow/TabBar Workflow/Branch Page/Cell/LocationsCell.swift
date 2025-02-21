@@ -15,7 +15,7 @@ protocol LocationsCellDelegate: AnyObject {
     func didTapPhoneNumBerButton()
 }
 
-class LocationsCell: UICollectionViewCell {
+final class LocationsCell: UICollectionViewCell {
     static let identifier = "LocationsCell"
     
     weak var delegate: LocationsCellDelegate?

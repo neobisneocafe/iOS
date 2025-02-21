@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class NetworkManager {
-//    static let shared = NetworkManager()
+    static let shared = NetworkManager()
     
     func performVoid(urlRequest: URLRequest, completion: @escaping (ProResult<Void>) -> Void) {
         AF.request(urlRequest).responseString { response in

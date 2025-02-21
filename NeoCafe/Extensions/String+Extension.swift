@@ -34,6 +34,10 @@ extension String {
 }
 
 
+
+
+// MARK: - ProfileEditViewController
+
 extension ProfileEditViewController {
     func editProfileAlert() {
         let alert = UIAlertController(
@@ -44,9 +48,7 @@ extension ProfileEditViewController {
         alert.addAction(UIAlertAction(title: "Нет", style: .cancel))
         present(alert, animated: true)
     }
-
 }
-
 
 extension ProfileEditViewController {
     func signOutProfileAlert() {
@@ -54,13 +56,13 @@ extension ProfileEditViewController {
             title: "Выход из учетной записи",
             message: "Вы уверены, что хотите выйти из своей учетной записи?",
             preferredStyle: .alert)
-
+        
         let cancelAction = UIAlertAction(
             title: "Отмена",
             style: .cancel) { _ in
                 // Do nothing
             }
-
+        
         let signOutAction = UIAlertAction(
             title: "Выйти",
             style: .destructive) { _ in
@@ -73,6 +75,5 @@ extension ProfileEditViewController {
         present(alert, animated: true, completion: nil)
     }
 }
-
 
 //v\completion: @escaping (()->Void)

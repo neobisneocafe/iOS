@@ -7,7 +7,7 @@
 
 import Foundation
 
-class QRCodeViewModel {
+final class QRCodeViewModel {
 
     private let apiService: QRCodesApiSubServiceProtocol = NewApiService.shared
     

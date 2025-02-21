@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class CompletedOrderTableViewCell: UITableViewCell {
+final class CompletedOrderTableViewCell: UITableViewCell {
     
     // MARK: Props
 

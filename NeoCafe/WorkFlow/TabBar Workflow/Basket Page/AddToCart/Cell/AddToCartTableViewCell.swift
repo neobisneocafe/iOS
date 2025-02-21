@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class AddToCartTableViewCell: UITableViewCell {
+final class AddToCartTableViewCell: UITableViewCell {
     
     static let identifier = "AddToCartTableViewCell"
     

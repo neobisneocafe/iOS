@@ -23,7 +23,6 @@ final class BasicButton: UIButton {
         self.layer.cornerRadius = 25
         self.layer.masksToBounds = true
     }
-    
     func setupConstrains(){
         snp.makeConstraints{
             $0.height.equalTo(computedHeight(56))

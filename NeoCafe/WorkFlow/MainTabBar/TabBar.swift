@@ -9,23 +9,23 @@ import UIKit
 import FittedSheets
 
  enum TabBar: CaseIterable {
-    case Home
-    case Basket
-    case QrCode
-    case Branch
-    case Profile
+    case home
+    case basket
+    case qrCode
+    case branch
+    case profile
     
     var tabBarItem: UITabBarItem {
         switch self {
-        case .Home:
+        case .home:
             return UITabBarItem(title: nil, image: UIImage(named: "home"), selectedImage: nil)
-        case .Basket:
+        case .basket:
             return UITabBarItem(title: nil, image: UIImage(named: "basket"), selectedImage: nil)
-        case .QrCode:
+        case .qrCode:
             return UITabBarItem(title: nil, image: UIImage(), selectedImage: nil)
-        case .Branch:
+        case .branch:
             return UITabBarItem(title: nil, image: UIImage(named: "location"), selectedImage: nil)
-        case .Profile:
+        case .profile:
             return UITabBarItem(title: nil, image: UIImage(named: "profile"), selectedImage: nil)
         }
     }
@@ -33,15 +33,15 @@ import FittedSheets
     var viewController: UINavigationController {
         var vc = UINavigationController()
         switch self {
-        case .Home:
+        case .home:
             vc = UINavigationController(rootViewController: MainViewController().self)
-        case .Basket:
+        case .basket:
             vc = UINavigationController(rootViewController: BasketViewController().self)
-        case .QrCode:
+        case .qrCode:
             vc = UINavigationController()
-        case .Branch:
+        case .branch:
             vc = UINavigationController(rootViewController:BranchViewController(branchViewModel: LocationsViewModel()))
-        case .Profile:
+        case .profile:
             vc = UINavigationController(rootViewController: ProfileViewController().self)
         }
         

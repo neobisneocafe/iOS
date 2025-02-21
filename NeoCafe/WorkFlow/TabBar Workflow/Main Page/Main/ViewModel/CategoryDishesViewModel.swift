@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CategoryDishesViewModel {
+final class CategoryDishesViewModel {
     var dishes = DishesResponse()
 
     private let apiService: CategoryApiSubServiceProtocol = NewApiService.shared

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class OpenOrderTableViewCell: UITableViewCell {
+final class OpenOrderTableViewCell: UITableViewCell {
     
     // MARK: Props
     
